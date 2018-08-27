@@ -1,0 +1,66 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    bitmask_rules                                      :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: aleduc <marvin@42.fr>                      +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2018/07/24 14:53:39 by aleduc            #+#    #+#              #
+#    Updated: 2018/07/26 15:56:30 by aleduc           ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+--------------------------------------------------------------------------------
+Rules for binary operator :
+
+  NOT 0111
+    = 1000
+
+
+      0101
+  AND 0011
+    = 0001
+
+
+      0101
+  OR  0011
+    = 0111
+
+
+      0101
+  XOR 0011
+    = 0110
+
+--------------------------------------------------------------------------------
+int command;-> int stockant 4 octets -> 32 bits -> jusqu'a 32 booleen potentiel
+
+command = 0b0001;			-> 1er bit pour representer un define
+
+command = command | 0b0010;		-> To set a bit : OR {MASK}
+
+command & 0b0100;			-> To read if a bit is set : AND {MASK}
+
+( 0b0011 & 0b1101
+0b0011 & ~0b0010 )
+
+--------------------------------------------------------------------------------
+Methode classique savoir si la valeur obtenu a besoin d'etre set :
+
+if (key == KEY_ZOOM_OUT)
+	env->keys_flag = env->keys_flag | ZOOM_OUT;
+else if ()...
+
+--------------------------------------------------------------------------------
+Methode pour check en meme temps que set :
+
+env->keys_flag = env->keys_flag
+	| ZOOM_IN * (key == KEY_ZOOM_IN)
+	| ZOOM_OUT * (key == KEY_ZOOM_OUT)
+	| X_PLUS * (key == KEY_X_PLUS)
+	| X_MINUS * (key == KEY_X_MINUS)
+	| Y_PLUS * (key == KEY_Y_PLUS)
+	| Y_MINUS * (key == KEY_Y_MINUS)
+	| Z_PLUS * (key == KEY_Z_PLUS)
+	| Z_MINUS * (key == KEY_Z_MINUS)
+	| HEIGHT_PLUS * (key == KEY_HEIGHT_PLUS)
+	| HEIGHT_MINUS * (key == KEY_HEIGHT_MINUS);
