@@ -12,7 +12,7 @@
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
-# include "../libft/libft.h"
+# include "libft.h"
 
 # define B_CD		0b000001
 # define B_ECHO		0b000010

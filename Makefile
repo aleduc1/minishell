@@ -25,12 +25,12 @@ all : $(NAME)
 $(NAME) : $(OBJ)
 	@make -C libft/
 	@printf "\r\033[K""\r\033[K""\033[32mCompilation...\033[0m"
-	@$(CC) $(CFLAGS) -L libft -l ft -o $(NAME) $(OBJ)
+	@$(CC) $(CFLAGS) $(OBJ) -Llibft/ -lft -Ilibft/ -Iincludes/ -o $(NAME)
 	@printf "\r\033[K""\r\033[K""\033[32mCompilation terminee !\033[0m\n"
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c libft/libft.h includes/minishell.h
 	@mkdir -p $(OBJ_PATH)
-	@$(CC) $(CFLAGS) -o $@ -c $<
+	@$(CC) $(CFLAGS) -o $@ -c $< -Ilibft/ -Iincludes
 	@printf "\033[42m \033[0m"
 
 .PHONY: all, clean, fclean, re
