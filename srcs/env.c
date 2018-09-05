@@ -19,9 +19,9 @@ void	put_in_list(char **scd_cut, t_lst **start)
 	t_lst	*node;
 
 	node = create_node(scd_cut);
-	ft_putendl(node->key);
+/*	ft_putendl(node->key);
 	ft_putendl(node->value);
-	ft_putendl("");
+	ft_putendl("");*/
 	add_node(start, node);
 }
 
@@ -67,7 +67,7 @@ void	env_cpy(char **environ, t_lst **env)
 			tmp = create_node(scd_cut);
 		else
 			put_in_list(scd_cut, &tmp);
-		free_double_tab(scd_cut);
+/*		free_double_tab(scd_cut);*/
 		count++;
 	}
 	free_double_tab(one_cut);

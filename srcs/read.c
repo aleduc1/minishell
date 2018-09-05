@@ -36,9 +36,7 @@ void	read_fct(t_env *env_s, t_lst **head)
 	while (42)
 	{
 		ft_putstr("~> ");
-		if (*env_s->line)
-			ft_putendl("BIIIM");
-		if (get_next_line(STDIN_FILENO, env_s->line))
+		if (get_next_line(STDIN_FILENO, &env_s->line))
 		{
 			if (env_s->line[0])
 			{

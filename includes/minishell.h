@@ -34,7 +34,7 @@ typedef struct	s_lst
 struct s_env
 {
 	char	**key_value;
-	char	*line[4096];
+	char	*line;
 	char	**tab;
 	int		bin;
 	t_fptr	*ptrf;

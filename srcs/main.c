@@ -12,26 +12,26 @@
 
 #include "minishell.h"
 
-int		malloc_struct(t_env *env_s)
+/*int		malloc_struct(t_env *env_s)
 {
 	if (!(env_s = ft_memalloc(sizeof(t_env*))))
-		return (0);
+		return (-1);
 	return (1);
-}
+}*/
 
 int		main(int ac, char **av, char **environ)
 {
-	t_env	*env_s;
+	t_env	env_s;
 	t_lst	*env;
 
-	env_s = 0;
+/*	env_s = 0;*/
 	if (ac && av)
-		ft_putendl("");
-	if (!(malloc_struct(env_s)))
-		return (-1);
+		ft_putendl("Sandra LPB");
+/*	if (!(malloc_struct(env_s)))
+		return (-1);*/
 	env_cpy(environ, &env);
 	ft_print_env(&env);
-//	read_fct(env_s, &env);
+	read_fct(&env_s, &env);
 	return (0);
 }
 
