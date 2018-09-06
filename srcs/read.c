@@ -28,7 +28,10 @@ void	ft_search_bin(t_env *env_s)
 	 * And you didnt found any built_in or binary, display error message
 */
 	if (env_s)
-		ft_putendl("Salut");
+	{
+		ft_putstr("minishell: command not found: ");
+		ft_putendl(env_s->tab[0]);
+	}
 }
 
 void	read_fct(t_env *env_s, t_lst **head)

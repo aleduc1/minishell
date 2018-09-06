@@ -25,7 +25,10 @@ int		ft_getarg(char *str)
 void	ft_cd(t_env *env_s, t_lst **head)
 {
 	if (env_s && head)
+	{
+		chdir(env_s->tab[1]);
 		ft_putendl("I need to execute cd");
+	}
 }
 
 void	ft_echo_pt_1(t_env *env_s, t_lst **head)
@@ -99,23 +102,29 @@ void	ft_env(t_env *env_s, t_lst **head)
 void	ft_setenv(t_env *env_s, t_lst **head)
 {
 	char	**tab;
+	int	i;
 
-	if (env_s->tab[1])
+	i = 1;
+	while (env_s->tab[i])
 	{
-		tab = ft_strsplit(env_s->tab[1], '=');
-		if (tab[1])
+		if (env_s->tab[i])
 		{
-			if (lst_check_name(tab[0], head))
-				modify_value(tab[0], tab[1], head);
+			tab = ft_strsplit(env_s->tab[i], '=');
+			if (tab[1])
+			{
+				if (lst_check_name(tab[0], head))
+					modify_value(tab[0], tab[1], head);
+				else
+					put_in_list(tab, head);
+			}
 			else
-				put_in_list(tab, head);
+				ft_putendl("Error : Usage = setenv key=value");
+			free_double_tab(tab);
 		}
 		else
 			ft_putendl("Error : Usage = setenv key=value");
-		free_double_tab(tab);
+		i++;
 	}
-	else
-		ft_putendl("Error : Usage = setenv key=value");
 }
 
 /* if key exist, add fonction to del a node */

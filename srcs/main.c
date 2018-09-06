@@ -26,12 +26,13 @@ int		main(int ac, char **av, char **environ)
 
 /*	env_s = 0;*/
 	if (ac && av)
-		ft_putendl("Sandra LPB");
+	{
 /*	if (!(malloc_struct(env_s)))
 		return (-1);*/
-	env_cpy(environ, &env);
-	ft_print_env(&env);
-	read_fct(&env_s, &env);
+		env_cpy(environ, &env);
+		ft_print_env(&env);
+		read_fct(&env_s, &env);
+	}
 	return (0);
 }
 
