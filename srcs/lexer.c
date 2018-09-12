@@ -6,7 +6,7 @@
 /*   By: aleduc <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/26 15:04:59 by aleduc            #+#    #+#             */
-/*   Updated: 2018/09/12 09:31:19 by aleduc           ###   ########.fr       */
+/*   Updated: 2018/09/12 14:47:34 by aleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,5 +59,6 @@ void	ft_parser(t_env *env_s, t_lst **head)
 			env_s->ptrf[env_s->count].f(env_s, head);
 		env_s->count++;
 	}
+	free(env_s->ptrf);
 	env_s->count = 0;
 }

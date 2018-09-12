@@ -6,7 +6,7 @@
 /*   By: aleduc <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/27 00:59:45 by aleduc            #+#    #+#             */
-/*   Updated: 2018/09/12 09:44:17 by aleduc           ###   ########.fr       */
+/*   Updated: 2018/09/12 14:47:44 by aleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ void	ft_exit(t_env *env_s, t_lst **head)
 			if (env_s->tab[1][0])
 			{
 				arg = ft_getarg(env_s->tab[1]);
+				free(env_s->ptrf);
+				free(env_s->tab);
 				exit(arg);
 			}
 		}

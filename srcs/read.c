@@ -6,7 +6,7 @@
 /*   By: aleduc <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/25 17:06:41 by aleduc            #+#    #+#             */
-/*   Updated: 2018/09/12 12:20:15 by aleduc           ###   ########.fr       */
+/*   Updated: 2018/09/12 14:46:25 by aleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,5 +69,6 @@ void	read_fct(t_env *env_s, t_lst **head)
 				env_s->bin == 0 ? ft_search_bin(env_s, head) : 0;
 			}
 		}
+		free(env_s->line);
 	}
 }

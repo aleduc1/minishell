@@ -6,7 +6,7 @@
 /*   By: aleduc <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/25 12:22:33 by aleduc            #+#    #+#             */
-/*   Updated: 2018/08/25 12:55:45 by aleduc           ###   ########.fr       */
+/*   Updated: 2018/09/12 14:31:27 by aleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static char	**ft_alloc_len(char const *str, char **tab)
 		i++;
 		if (str[i] == ' ' || str[i] == '\t' || str[i] == '\n' || str[i] == '\0')
 		{
-			if (!(tab[j] = (char*)malloc(sizeof(char) * (len + 1))))
+			if (!(tab[j] = (char*)malloc(sizeof(char) * (len + 2))))
 				return (NULL);
 			j++;
 			len = 0;
