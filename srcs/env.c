@@ -6,7 +6,7 @@
 /*   By: aleduc <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/24 15:09:02 by aleduc            #+#    #+#             */
-/*   Updated: 2018/09/12 08:19:17 by aleduc           ###   ########.fr       */
+/*   Updated: 2018/09/12 09:16:19 by aleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,14 @@ void	env_cpy(char **environ, t_lst **env)
 	one_cut = ft_first_cut(environ);
 	while (one_cut[count])
 	{
+//		printf("|%s|\n", one_cut[count]);
 		scd_cut = ft_strsplit(one_cut[count], '=');
+//		printf("scd_cut[0] |%s|\n", scd_cut[0]);
 		if (count == 0)
 			tmp = create_node(scd_cut);
 		else
 			put_in_list(scd_cut, &tmp);
-/*		free_double_tab(scd_cut);*/
+		free_double_tab(scd_cut);
 		count++;
 	}
 	free_double_tab(one_cut);

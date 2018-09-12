@@ -6,13 +6,13 @@
 /*   By: aleduc <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/20 18:01:18 by aleduc            #+#    #+#             */
-/*   Updated: 2018/08/26 19:17:26 by aleduc           ###   ########.fr       */
+/*   Updated: 2018/09/12 12:16:40 by aleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
-# include "libft.h"
+# include "get_next_line.h"
 
 # define B_CD		0b000001
 # define B_ECHO		0b000010
@@ -66,8 +66,13 @@ void	modify_value(char *key, char *value, t_lst **head);
 
 /* Reading input */
 
-void	ft_search_bin(t_env *env_s);
+char	*get_path(t_lst **head);
+void	ft_search_bin(t_env *env_s, t_lst **head);
 void	read_fct(t_env *env_s, t_lst **head);
+
+/* Dir functions */
+
+int		dir_functs(char *path, t_env *env_s);
 
 /* Lexing-Parsing */
 

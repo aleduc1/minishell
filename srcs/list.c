@@ -6,7 +6,7 @@
 /*   By: aleduc <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/25 14:52:38 by aleduc            #+#    #+#             */
-/*   Updated: 2018/09/12 08:19:56 by aleduc           ###   ########.fr       */
+/*   Updated: 2018/09/12 09:16:49 by aleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ t_lst	*create_node(char **scd_cut)
 		node->key = NULL;
 	else
 		node->key = ft_strcpy(node->key, scd_cut[0]);
+//	printf("scd_cut[0] = |%s|\n", scd_cut[0]);
+//	printf("scd_cut[1] = |%s|\n", scd_cut[1]);
 	if (!(node->value = (char *)ft_memalloc(sizeof(char) * (ft_strlen(scd_cut[1]) + 1))))
 		node->value = NULL;
 	else

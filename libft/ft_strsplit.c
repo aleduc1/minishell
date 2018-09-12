@@ -5,106 +5,105 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aleduc <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/16 17:35:51 by aleduc            #+#    #+#             */
-/*   Updated: 2018/08/25 17:09:48 by aleduc           ###   ########.fr       */
+/*   Created: 2018/09/12 09:13:29 by aleduc            #+#    #+#             */
+/*   Updated: 2018/09/12 09:16:34 by aleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static	char	**ft_alloc_len(char const *s, char **tab, char c)
+static int		ft_index_mot(char *str, int mot, char separateur)
 {
-	int		i;
-	int		j;
-	int		len;
+	int	i;
+	int	cntword;
 
 	i = 0;
-	j = 0;
-	len = 0;
-	while (s[i] && (s[i] == c))
-		i++;
-	while (s[i])
+	cntword = 0;
+	while (str[i])
 	{
-		i++;
-		if (s[i] == c || s[i] == '\0')
-		{
-			if (!(tab[j] = (char*)malloc(sizeof(char) * (len + 1))))
-				return (NULL);
-			j++;
-			len = 0;
-		}
-		while (s[i] == c)
+		while (str[i] == separateur)
 			i++;
-		len++;
+		if (cntword == mot)
+			return (i);
+		while (str[i] != separateur && str[i])
+			i++;
+		cntword++;
 	}
-	return (tab);
+	return (0);
 }
 
-static	char	**ft_fill_memories(char const *s, char **tab, char c)
+static int		ft_nb_mots(char *str, char separateur)
 {
-	int		i;
-	int		j;
-	int		len;
+	int	i;
+	int	nbword;
 
 	i = 0;
-	j = 0;
-	len = 0;
-	while (s[i] == c)
-		i++;
-	while (s[i])
+	nbword = 0;
+	while (str[i])
 	{
-		tab[j][len] = s[i];
-		i++;
-		len++;
-		if (s[i] == '\0' || s[i] == c)
-		{
-			tab[j][len] = '\0';
-			j++;
-			len = 0;
-		}
-		while (s[i] == c)
+		if (str[i] == separateur)
 			i++;
-	}
-	return (tab);
-}
-
-static	char	**ft_alloc_words(char const *s, char **tab, char c)
-{
-	int		i;
-	int		words;
-
-	i = 0;
-	words = 0;
-	while (s[i] == c)
-		i++;
-	while (s[i])
-	{
-		if (!(s[i] == c))
-		{
-			words++;
-			while (s[i] && !(s[i] == c))
-				i++;
-		}
 		else
-			i++;
+		{
+			while (str[i] != separateur && str[i])
+				i++;
+			nbword++;
+		}
 	}
-	if (!(tab = (char**)malloc(sizeof(char*) * (words + 1))))
-		return (NULL);
-	tab[words] = 0;
-	return (tab);
+	return (nbword);
+}
+
+static int		ft_nb_ltr(char *str, int mot, char separateur)
+{
+	int	index;
+	int	nbletter;
+
+	index = ft_index_mot(str, mot, separateur);
+	nbletter = 0;
+	while (str[index] != separateur && str[index])
+	{
+		nbletter++;
+		index++;
+	}
+	return (nbletter);
+}
+
+static void		ft_remplissage(char **tab_rt, char *str, int i, char c)
+{
+	int	j;
+	int	k;
+
+	j = 0;
+	k = ft_index_mot(str, i, c);
+	while (str[k] != c && str[k])
+	{
+		tab_rt[i][j] = str[k];
+		k++;
+		j++;
+	}
+	tab_rt[i][j] = '\0';
 }
 
 char			**ft_strsplit(char const *s, char c)
 {
-	char	**tab;
+	int			i;
+	char		**tab_rt;
+	char		*str;
 
-	if (!s)
+	if (s == NULL)
 		return (NULL);
-	tab = 0;
-	if (!(tab = ft_alloc_words(s, tab, c)))
+	str = (char *)s;
+	i = 0;
+	if (!(tab_rt = (char**)malloc(sizeof(char*) * (ft_nb_mots(str, c) + 1))))
 		return (NULL);
-	if (!(tab = ft_alloc_len(s, tab, c)))
-		return (NULL);
-	tab = ft_fill_memories(s, tab, c);
-	return (tab);
+	while (i < ft_nb_mots(str, c))
+	{
+		tab_rt[i] = (char*)malloc(sizeof(char) * (ft_nb_ltr(str, i, c) + 1));
+		if (tab_rt[i] == NULL)
+			return (NULL);
+		ft_remplissage(tab_rt, str, i, c);
+		i++;
+	}
+	tab_rt[i] = NULL;
+	return (tab_rt);
 }

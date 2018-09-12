@@ -6,7 +6,7 @@
 /*   By: aleduc <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/27 00:59:45 by aleduc            #+#    #+#             */
-/*   Updated: 2018/09/12 08:19:09 by aleduc           ###   ########.fr       */
+/*   Updated: 2018/09/12 09:44:17 by aleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	ft_cd(t_env *env_s, t_lst **head)
 {
 	if (env_s && head)
 	{
-		chdir(env_s->tab[1]);
+//		chdir(env_s->tab[1]);
 		ft_putendl("I need to execute cd");
 	}
 }
