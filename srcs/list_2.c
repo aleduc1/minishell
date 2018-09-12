@@ -6,7 +6,7 @@
 /*   By: aleduc <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/25 16:27:24 by aleduc            #+#    #+#             */
-/*   Updated: 2018/09/12 08:20:04 by aleduc           ###   ########.fr       */
+/*   Updated: 2018/09/12 17:51:05 by aleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,25 @@ void	modify_value(char *key, char *value, t_lst **head)
 		}
 		curlist = curlist->next;
 	}
+}
+
+void	setoldpwd(t_lst **head)
+{
+	if (head)
+		return ;
+	return ;
+}
+
+void	setpwd(char *cwd, t_lst **head)
+{
+	if (cwd && head)
+		return ;
+	return ;
+}
+
+char	*get_value_of_key(t_lst **head, char *key)
+{
+	if (head && key)
+		return (NULL);
+	return (NULL);
 }

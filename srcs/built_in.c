@@ -6,7 +6,7 @@
 /*   By: aleduc <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/27 00:59:45 by aleduc            #+#    #+#             */
-/*   Updated: 2018/09/12 14:47:44 by aleduc           ###   ########.fr       */
+/*   Updated: 2018/09/12 18:27:20 by aleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,66 @@ int		ft_getarg(char *str)
 	return (args);
 }
 
-void	ft_cd(t_env *env_s, t_lst **head)
+void	ft_cd_pt_1(t_env *env_s, t_lst **head)
 {
-	if (env_s && head)
+	char	*cwd;
+
+	cwd = NULL;
+	if ((env_s->tab[1]) && (env_s->tab[1][0] != '-'))
 	{
-//		chdir(env_s->tab[1]);
-		ft_putendl("I need to execute cd");
+		if (!(access(env_s->tab[1], X_OK) == 0))
+			ft_putendl("File doesnt exist");
+		else
+		{
+			if (chdir(env_s->tab[1]) == -1)
+				ft_putendl("The argument isnt an accessible repository");
+			else
+			{
+				getcwd(cwd, 4096);
+				setoldpwd(head);
+				setpwd(cwd, head);
+			}
+		}
 	}
+	else
+		ft_cd_pt_2(env_s, head);
+}
+
+void	ft_cd_pt_2(t_env *env_s, t_lst **head)
+{
+	char	*value;
+	char	*cwd;
+
+	cwd = NULL;
+	if (env_s->tab[1])
+	{
+		value = get_value_of_key(head, "OLDPWD");
+		if (!(access(value, X_OK) == 0))
+			ft_putendl("File doesnt exist");
+		else
+		{
+			if (chdir(value) == -1)
+				ft_putendl("The argument isnt an accessible repository");
+			else
+			{
+				getcwd(cwd, 4096);
+				setoldpwd(head);
+				setpwd(cwd, head);
+			}
+		}
+	}
+	else
+		ft_cd_pt_3(head);
+}
+
+void	ft_cd_pt_3(t_lst **head)
+{
+	char	*home;
+
+	home = get_value_of_key(head, "HOME");
+	chdir(home);
+	setoldpwd(head);
+	setpwd(home, head);
 }
 
 void	ft_echo_pt_1(t_env *env_s, t_lst **head)
@@ -103,7 +156,7 @@ void	ft_env(t_env *env_s, t_lst **head)
 void	ft_setenv(t_env *env_s, t_lst **head)
 {
 	char	**tab;
-	int	i;
+	int		i;
 
 	i = 1;
 	while (env_s->tab[i])

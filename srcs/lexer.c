@@ -6,7 +6,7 @@
 /*   By: aleduc <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/26 15:04:59 by aleduc            #+#    #+#             */
-/*   Updated: 2018/09/12 14:47:34 by aleduc           ###   ########.fr       */
+/*   Updated: 2018/09/12 17:36:30 by aleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int		ft_lexer(t_env *env_s)
 void	set_tab_fptr(t_env *env_s)
 {
 	env_s->ptrf = (t_fptr *)ft_memalloc(sizeof(t_fptr) * 7);
-	env_s->ptrf[0].f = &ft_cd;
+	env_s->ptrf[0].f = &ft_cd_pt_1;
 	env_s->ptrf[0].bitmask = B_CD;
 	env_s->ptrf[1].f = &ft_echo_pt_1;
 	env_s->ptrf[1].bitmask = B_ECHO;

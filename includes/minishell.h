@@ -6,7 +6,7 @@
 /*   By: aleduc <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/20 18:01:18 by aleduc            #+#    #+#             */
-/*   Updated: 2018/09/12 12:30:47 by aleduc           ###   ########.fr       */
+/*   Updated: 2018/09/12 18:24:35 by aleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,12 @@ void	set_tab_fptr(t_env *env_s);
 
 int		ft_getarg(char *str);
 
-void	ft_cd(t_env *env_s, t_lst **head);
+void	ft_cd_pt_1(t_env *env_s, t_lst **head);
+void	ft_cd_pt_2(t_env *env_s, t_lst **head);
+void	ft_cd_pt_3(t_lst **head);
+void	setoldpwd(t_lst **head);
+void	setpwd(char *cwd, t_lst **head);
+char	*get_value_of_key(t_lst **head, char *key);
 
 void	ft_echo_pt_1(t_env *env_s, t_lst **head);
 void	ft_echo_pt_2(t_env *env_s);
