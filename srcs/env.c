@@ -6,11 +6,11 @@
 /*   By: aleduc <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/24 15:09:02 by aleduc            #+#    #+#             */
-/*   Updated: 2018/08/26 19:31:04 by aleduc           ###   ########.fr       */
+/*   Updated: 2018/09/12 08:19:17 by aleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "minishell.h"
 
 /* Ajouter le double tableau dans la liste */
 

@@ -6,11 +6,11 @@
 /*   By: aleduc <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/25 16:27:24 by aleduc            #+#    #+#             */
-/*   Updated: 2018/08/26 18:21:25 by aleduc           ###   ########.fr       */
+/*   Updated: 2018/09/12 08:20:04 by aleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "minishell.h"
 
 /* Return one if a node with name exist in the list */
 

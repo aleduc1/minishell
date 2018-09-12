@@ -6,11 +6,11 @@
 /*   By: aleduc <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/26 15:04:59 by aleduc            #+#    #+#             */
-/*   Updated: 2018/08/26 18:57:07 by aleduc           ###   ########.fr       */
+/*   Updated: 2018/09/12 08:19:46 by aleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "minishell.h"
 
 int		ft_lexer(t_env *env_s)
 {

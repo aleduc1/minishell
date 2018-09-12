@@ -6,12 +6,11 @@
 /*   By: aleduc <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/27 00:59:45 by aleduc            #+#    #+#             */
-/*   Updated: 2018/08/26 19:05:42 by aleduc           ###   ########.fr       */
+/*   Updated: 2018/09/12 08:19:09 by aleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
-#include "../libft/libft.h"
+#include "minishell.h"
 
 int		ft_getarg(char *str)
 {
