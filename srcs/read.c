@@ -70,5 +70,6 @@ void	read_fct(t_env *env_s, t_lst **head)
 			}
 		}
 		free(env_s->line);
+		ft_print_env(head);
 	}
 }

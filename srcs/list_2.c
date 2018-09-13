@@ -50,23 +50,36 @@ void	modify_value(char *key, char *value, t_lst **head)
 	}
 }
 
+/* Set value of OLDPWD being the one of PWD */
+
 void	setoldpwd(t_lst **head)
 {
-	if (head)
-		return ;
-	return ;
+	char	*value;
+
+	value = get_value_of_key(head, "PWD");
+	modify_value("OLDPWD", value, head);
 }
 
-void	setpwd(char *cwd, t_lst **head)
-{
-	if (cwd && head)
-		return ;
-	return ;
-}
+/* Get the value of the key sent in param and return it in a alloc'd char* */
 
 char	*get_value_of_key(t_lst **head, char *key)
 {
-	if (head && key)
-		return (NULL);
+	t_lst	*curlist;
+	char	*value;
+
+	value = NULL;
+	curlist = *head;
+	while (curlist)
+	{
+		if (!(ft_strcmp(curlist->key, key)))
+		{
+			if (!(value = (char*)ft_memalloc(sizeof(char) * (ft_strlen(curlist->value) + 1))))
+				value = NULL;
+			else
+				value = ft_strcpy(value, curlist->value);
+			return (value);
+		}
+		curlist = curlist->next;
+	}
 	return (NULL);
 }
