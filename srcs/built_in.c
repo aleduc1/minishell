@@ -6,7 +6,7 @@
 /*   By: aleduc <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/27 00:59:45 by aleduc            #+#    #+#             */
-/*   Updated: 2018/09/12 18:27:20 by aleduc           ###   ########.fr       */
+/*   Updated: 2018/09/14 15:28:19 by aleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,8 @@ int		ft_getarg(char *str)
 
 void	ft_cd_pt_1(t_env *env_s, t_lst **head)
 {
-	char	*cwd;
+	char	cwd[4096];
 
-	cwd = NULL;
 	if ((env_s->tab[1]) && (env_s->tab[1][0] != '-'))
 	{
 		if (!(access(env_s->tab[1], X_OK) == 0))
@@ -49,9 +48,8 @@ void	ft_cd_pt_1(t_env *env_s, t_lst **head)
 void	ft_cd_pt_2(t_env *env_s, t_lst **head)
 {
 	char	*value;
-	char	*cwd;
+	char	cwd[4096];
 
-	cwd = NULL;
 	if (env_s->tab[1])
 	{
 		value = get_value_of_key(head, "OLDPWD");
