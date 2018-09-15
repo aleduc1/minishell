@@ -61,22 +61,24 @@ void	add_node(t_lst **head, t_lst *node);
 void	ft_print_env(t_lst **head);
 void	del_a_node(char *key, t_lst **head);
 void	check_first_node(char *key, t_lst **head);
-int		lst_check_name(char *name, t_lst **head);
+int	lst_check_name(char *name, t_lst **head);
 void	modify_value(char *key, char *value, t_lst **head);
+char	*get_value_of_key(t_lst **head, char *key);
+void	setoldpwd(t_lst **head);
+void	setpwd(char *cwd, t_lst **head);
 
 /* Reading input */
 
-char	*get_path(t_lst **head);
 void	ft_search_bin(t_env *env_s, t_lst **head);
 void	read_fct(t_env *env_s, t_lst **head);
 
 /* Dir functions */
 
-int		dir_functs(char *path, t_env *env_s);
+int	dir_functs(char *path, t_env *env_s, t_lst **head);
 
 /* Lexing-Parsing */
 
-int		ft_lexer(t_env *env_s);
+int	ft_lexer(t_env *env_s);
 void	ft_parser(t_env *env_s, t_lst **head);
 void	set_tab_fptr(t_env *env_s);
 
@@ -87,9 +89,6 @@ int		ft_getarg(char *str);
 void	ft_cd_pt_1(t_env *env_s, t_lst **head);
 void	ft_cd_pt_2(t_env *env_s, t_lst **head);
 void	ft_cd_pt_3(t_lst **head);
-void	setoldpwd(t_lst **head);
-void	setpwd(char *cwd, t_lst **head);
-char	*get_value_of_key(t_lst **head, char *key);
 
 void	ft_echo_pt_1(t_env *env_s, t_lst **head);
 void	ft_echo_pt_2(t_env *env_s);

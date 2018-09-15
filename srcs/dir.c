@@ -12,9 +12,9 @@
 
 #include "minishell.h"
 
-int		dir_functs(char *path, t_env *env_s)
+int	dir_functs(char *path, t_env *env_s, t_lst **head)
 {
-	if (path && env_s)
+	if (path && env_s && head)
 		return (0);
 	return (0);
 }
