@@ -26,7 +26,6 @@ void	ft_search_bin(t_env *env_s, t_lst **head)
 	char	**paths;
 	int		counts;
 /*
-	 * Some ideas on how to do it :
 	 * Break up every path from $PATH in a doubletab						*
 	 * While there is directory												*
 	 * Open and read directory pointed to by $PATH							*

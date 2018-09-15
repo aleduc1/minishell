@@ -66,6 +66,7 @@ void	ft_cd_pt_2(t_env *env_s, t_lst **head)
 				modify_value("PWD", cwd, head);
 			}
 		}
+		free(value);
 	}
 	else
 		ft_cd_pt_3(head);
@@ -79,6 +80,7 @@ void	ft_cd_pt_3(t_lst **head)
 	chdir(home);
 	setoldpwd(head);
 	modify_value("PWD", home, head);
+	free(home);
 }
 
 void	ft_echo_pt_1(t_env *env_s, t_lst **head)

@@ -58,6 +58,7 @@ void	setoldpwd(t_lst **head)
 
 	value = get_value_of_key(head, "PWD");
 	modify_value("OLDPWD", value, head);
+	free(value);
 }
 
 /* Get the value of the key sent in param and return it in a alloc'd char* */
