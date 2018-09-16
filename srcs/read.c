@@ -31,8 +31,8 @@ void	ft_search_bin(t_env *env_s, t_lst **head)
 		envpath = get_value_of_key(head, "PATH");
 		paths = ft_strsplit(envpath, ':');
 		free(envpath);
-		while (paths[counts])
-			ft_putendl(paths[counts++]);
+/*		while (paths[counts])
+			ft_putendl(paths[counts++]);*/
 /*	Open and read directory pointed to by $PATH	*/
 		while (paths[counts])
 		{

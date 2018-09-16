@@ -12,7 +12,9 @@
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
-# include "get_next_line.h"
+# include "libft.h"
+# include <dirent.h>
+# include <sys/types.h>
 
 # define B_CD		0b000001
 # define B_ECHO		0b000010
