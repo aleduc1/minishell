@@ -6,7 +6,7 @@
 /*   By: aleduc <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/12 12:20:24 by aleduc            #+#    #+#             */
-/*   Updated: 2018/09/17 18:30:54 by aleduc           ###   ########.fr       */
+/*   Updated: 2018/09/17 19:57:05 by aleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,15 @@ int		dir_functs(char *filename, t_env *env_s)
 
 void	ft_fork_exec(char *filename, t_env *env_s, t_lst **head)
 {
+	char	*path;
+
+	path = NULL;
 	ft_putstr("Salut j'ai trouver l'executable dans le dossier : ");
 	ft_putendl(filename);
 	if (filename && env_s && head)
 	{
+		path = create_path(filename, env_s->tab[0]);
+		if (access(path, X_OK) == 0)
 		return ;
 	}
 	return ;
