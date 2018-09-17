@@ -6,7 +6,7 @@
 /*   By: aleduc <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/25 17:06:41 by aleduc            #+#    #+#             */
-/*   Updated: 2018/09/17 18:12:00 by aleduc           ###   ########.fr       */
+/*   Updated: 2018/09/17 22:45:28 by aleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,15 @@ void	ft_search_bin(t_env *env_s, t_lst **head)
 {
 	char	*envpath;
 	char	**paths;
-	int	counts;
+	int		counts;
+	int		code;
 /*
-	 * If in a dir you found the command the user entered *
-	 * Then invok the binary with fork and exec *
-										 */
+ * If in a dir you found the command the user entered *
+ * Then invok the binary with fork and exec *
+ */
 
 /*	Break up every path from $PATH in a doubletab	*/
+	code = 0;
 	counts = 0;
 	if (lst_check_name("PATH", head))
 	{
@@ -32,7 +34,7 @@ void	ft_search_bin(t_env *env_s, t_lst **head)
 		paths = ft_strsplit(envpath, ':');
 		free(envpath);
 /*		while (paths[counts])
-			ft_putendl(paths[counts++]);*/
+				ft_putendl(paths[counts++]);*/
 /*	Open and read directory pointed to by $PATH	*/
 		while (paths[counts])
 		{
@@ -41,15 +43,20 @@ void	ft_search_bin(t_env *env_s, t_lst **head)
 			counts++;
 		}
 		if (paths[counts])
-			ft_fork_exec(paths[counts], env_s, head);
+			code = ft_fork_exec(paths[counts], env_s, head);
 	}
+	else
+		ft_putendl("No variable named PATH in your environment");
+	if (code == 0)
+	{
 /*	If you finished all path from $PATH	*/
 /*	And you didnt found any built_in or binary, display error message	*/
-	ft_putstr("minishell: command not found");
-	if (env_s->tab[0])
-	{
-		ft_putstr(": ");
-		ft_putendl(env_s->tab[0]);
+		ft_putstr("minishell: command not found");
+		if (env_s->tab[0])
+		{
+			ft_putstr(": ");
+			ft_putendl(env_s->tab[0]);
+		}
 	}
 }
 
