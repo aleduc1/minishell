@@ -6,7 +6,7 @@
 /*   By: aleduc <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/25 17:06:41 by aleduc            #+#    #+#             */
-/*   Updated: 2018/09/12 15:42:18 by aleduc           ###   ########.fr       */
+/*   Updated: 2018/09/17 18:12:00 by aleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,12 @@ void	ft_search_bin(t_env *env_s, t_lst **head)
 /*	Open and read directory pointed to by $PATH	*/
 		while (paths[counts])
 		{
-			if (dir_functs(paths[counts], env_s, head) == 1)
+			if (dir_functs(paths[counts], env_s) == 1)
 				break ;
 			counts++;
 		}
 		if (paths[counts])
-			return ;
+			ft_fork_exec(paths[counts], env_s, head);
 	}
 /*	If you finished all path from $PATH	*/
 /*	And you didnt found any built_in or binary, display error message	*/

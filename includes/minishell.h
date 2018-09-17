@@ -6,13 +6,13 @@
 /*   By: aleduc <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/20 18:01:18 by aleduc            #+#    #+#             */
-/*   Updated: 2018/09/12 18:24:35 by aleduc           ###   ########.fr       */
+/*   Updated: 2018/09/17 18:30:57 by aleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
-# include "libft.h"
+# include "../libft/libft.h"
 # include <dirent.h>
 # include <sys/types.h>
 
@@ -63,7 +63,7 @@ void	add_node(t_lst **head, t_lst *node);
 void	ft_print_env(t_lst **head);
 void	del_a_node(char *key, t_lst **head);
 void	check_first_node(char *key, t_lst **head);
-int	lst_check_name(char *name, t_lst **head);
+int		lst_check_name(char *name, t_lst **head);
 void	modify_value(char *key, char *value, t_lst **head);
 char	*get_value_of_key(t_lst **head, char *key);
 void	setoldpwd(t_lst **head);
@@ -76,11 +76,13 @@ void	read_fct(t_env *env_s, t_lst **head);
 
 /* Dir functions */
 
-int	dir_functs(char *path, t_env *env_s, t_lst **head);
+void	ft_error(int code);
+int		dir_functs(char *filename, t_env *env_s);
+void	ft_fork_exec(char *filename, t_env *env_s, t_lst **head);
 
 /* Lexing-Parsing */
 
-int	ft_lexer(t_env *env_s);
+int		ft_lexer(t_env *env_s);
 void	ft_parser(t_env *env_s, t_lst **head);
 void	set_tab_fptr(t_env *env_s);
 

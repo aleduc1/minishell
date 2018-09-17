@@ -6,39 +6,55 @@
 /*   By: aleduc <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/12 12:20:24 by aleduc            #+#    #+#             */
-/*   Updated: 2018/09/12 12:28:18 by aleduc           ###   ########.fr       */
+/*   Updated: 2018/09/17 18:30:54 by aleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	dir_functs(char *path, t_env *env_s, t_lst **head)
+void	ft_error(int code)
 {
-	DIR		*pdir;
+	if (code == 1)
+		ft_putendl("opendir failed");
+	else if (code == 2)
+		ft_putendl("readdir failed");
+	else if (code == 3)
+		ft_putendl("closedir failed");
+	exit (-1);
+}
+
+int		dir_functs(char *filename, t_env *env_s)
+{
+	DIR				*pdir;
 	struct dirent	*pent;
+	int				error;
 
-
-	if (env_s && head)
+	error = 1;
+	if (!(pdir = opendir(filename)))
+		ft_error(error);
+	while ((pent = readdir(pdir)))
 	{
-		if (!(pdir = opendir(path)))
+		if (pent == NULL)
+			ft_error((error = 2));
+		if (!(ft_strcmp(pent->d_name, env_s->tab[0])))
 		{
-			ft_putendl("BRUH TON PATH IL PUE");
-			exit(0);
-		}
-		while ((pent = readdir(pdir)))
-		{
-			if (pent == NULL)
-			{
-				ft_putendl("Cant readdir your DIR*");
-				exit(0);
-			}
-			ft_putendl(pent->d_name);
-		}
-		if (closedir(pdir) == -1)
-		{
-			ft_putendl("Cant closedir your repository");
-			exit(0);
+			if (closedir(pdir) == -1)
+				ft_error((error = 3));
+			return (1);
 		}
 	}
+	if (closedir(pdir) == -1)
+		ft_error((error = 3));
 	return (0);
+}
+
+void	ft_fork_exec(char *filename, t_env *env_s, t_lst **head)
+{
+	ft_putstr("Salut j'ai trouver l'executable dans le dossier : ");
+	ft_putendl(filename);
+	if (filename && env_s && head)
+	{
+		return ;
+	}
+	return ;
 }
