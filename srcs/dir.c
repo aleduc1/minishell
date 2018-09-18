@@ -6,7 +6,7 @@
 /*   By: aleduc <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/12 12:20:24 by aleduc            #+#    #+#             */
-/*   Updated: 2018/09/17 23:04:00 by aleduc           ###   ########.fr       */
+/*   Updated: 2018/09/18 03:00:24 by aleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ void	ft_error(int code)
 		ft_putendl("closedir failed");
 	else if (code == 4)
 		ft_putendl("Path creation failed");
+	else if (code == 5)
+		ft_putendl("Child forked failed");
 }
 
 int		dir_functs(char *filename, t_env *env_s)
@@ -67,16 +69,36 @@ int		ft_fork_exec(char *filename, t_env *env_s, t_lst **head)
 	if (filename && env_s && head)
 	{
 		if (!(path = create_path(filename, env_s->tab[0])))
+		{
 			ft_error(4);
+			exit (0);
+		}
 		if (!(access(path, X_OK) == 0))
-			return ;
+		{
+			free(path);
+			return (0);
+		}
 		else
 		{
-			ft_putendl("a");
-//			call_bin(path, head);
-			return ;
+			call_bin(path, env_s, head);
+			free(path);
+			return (1);
 		}
-		return ;
 	}
-	return ;
+	return (0);
+}
+
+void	call_bin(char *binpath, t_env *env_s, t_lst **head)
+{
+	pid_t	pid;
+	char	**env;
+
+	env = list_to_char(head);
+	pid = fork();
+	if (pid == -1)
+		ft_error(5);
+	if (pid == 0)
+		execve(binpath, env_s->tab, env);
+	wait(NULL);
+	free_double_tab(env);
 }

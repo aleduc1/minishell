@@ -6,7 +6,7 @@
 /*   By: aleduc <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/25 16:27:24 by aleduc            #+#    #+#             */
-/*   Updated: 2018/09/14 15:28:20 by aleduc           ###   ########.fr       */
+/*   Updated: 2018/09/18 02:54:14 by aleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,4 +83,30 @@ char	*get_value_of_key(t_lst **head, char *key)
 		curlist = curlist->next;
 	}
 	return (NULL);
+}
+
+/* Turn a lst** to char** */
+
+char	**list_to_char(t_lst **head)
+{
+	int		count;
+	int		size;
+	char	**tab;
+	t_lst	*curlist;
+
+	size = 0;
+	curlist = *head;
+	count = ft_lstsize(head);
+	if (!(tab = ft_memalloc(sizeof(char *) * (count + 1))))
+		return (NULL);
+	count = 0;
+	while (curlist)
+	{
+		size = ft_strlen(curlist->key) + ft_strlen(curlist->value);
+		if (!(tab[count] = ft_memalloc(sizeof(char) * (size + 2))))
+			return (NULL);
+		ft_fill_str(tab[count], curlist->key, curlist->value);
+		curlist = curlist->next;
+	}
+	return (tab);
 }

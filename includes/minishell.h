@@ -6,7 +6,7 @@
 /*   By: aleduc <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/20 18:01:18 by aleduc            #+#    #+#             */
-/*   Updated: 2018/09/17 23:04:01 by aleduc           ###   ########.fr       */
+/*   Updated: 2018/09/18 03:01:37 by aleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,6 @@
 typedef struct s_env t_env;
 typedef struct s_fptr t_fptr;
 
-typedef struct	s_lst
-{
-	char			*key;
-	char			*value;
-	struct s_lst	*next;
-}				t_lst;
 
 struct s_env
 {
@@ -68,6 +62,7 @@ void	modify_value(char *key, char *value, t_lst **head);
 char	*get_value_of_key(t_lst **head, char *key);
 void	setoldpwd(t_lst **head);
 void	setpwd(char *cwd, t_lst **head);
+char	**list_to_char(t_lst **head);
 
 /* Reading input */
 
@@ -78,7 +73,9 @@ void	read_fct(t_env *env_s, t_lst **head);
 
 void	ft_error(int code);
 int		dir_functs(char *filename, t_env *env_s);
-void	ft_fork_exec(char *filename, t_env *env_s, t_lst **head);
+int		ft_fork_exec(char *filename, t_env *env_s, t_lst **head);
+char	*create_path(char *filename, char *bin);
+void	call_bin(char *binpath, t_env *env_s, t_lst **head);
 
 /* Lexing-Parsing */
 
