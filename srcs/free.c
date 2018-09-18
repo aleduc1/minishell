@@ -6,7 +6,7 @@
 /*   By: aleduc <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/17 17:45:37 by aleduc            #+#    #+#             */
-/*   Updated: 2018/09/17 17:45:40 by aleduc           ###   ########.fr       */
+/*   Updated: 2018/09/18 07:16:35 by aleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,12 @@ void	free_double_tab(char **tab)
 	}
 	free(tab);
 	tab = 0;
+}
+
+void	free_struct(t_env *env_s)
+{
+	if (env_s->line)
+		free(env_s->line);
+	if (env_s->tab)
+		free_double_tab(env_s->tab);
 }

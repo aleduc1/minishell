@@ -6,29 +6,19 @@
 /*   By: aleduc <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/19 18:17:33 by aleduc            #+#    #+#             */
-/*   Updated: 2018/09/12 08:20:09 by aleduc           ###   ########.fr       */
+/*   Updated: 2018/09/18 06:34:29 by aleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-/*int		malloc_struct(t_env *env_s)
-{
-	if (!(env_s = ft_memalloc(sizeof(t_env*))))
-		return (-1);
-	return (1);
-}*/
 
 int		main(int ac, char **av, char **environ)
 {
 	t_env	env_s;
 	t_lst	*env;
 
-/*	env_s = 0;*/
 	if (ac && av)
 	{
-/*	if (!(malloc_struct(env_s)))
-		return (-1);*/
 		env_cpy(environ, &env);
 		ft_print_env(&env);
 		read_fct(&env_s, &env);

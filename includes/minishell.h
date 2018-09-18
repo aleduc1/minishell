@@ -6,7 +6,7 @@
 /*   By: aleduc <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/20 18:01:18 by aleduc            #+#    #+#             */
-/*   Updated: 2018/09/18 04:48:54 by aleduc           ###   ########.fr       */
+/*   Updated: 2018/09/18 06:53:18 by aleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ char	*get_value_of_key(t_lst **head, char *key);
 void	setoldpwd(t_lst **head);
 void	setpwd(char *cwd, t_lst **head);
 char	**list_to_char(t_lst **head);
+void	del_lst(t_lst **head);
 
 /* Reading input */
 
@@ -105,5 +106,5 @@ void	ft_unsetenv(t_env *env_s, t_lst **head);
 /* Free fonctions */
 
 void	free_double_tab(char **tab);
-
+void	free_struct(t_env *env_s);
 #endif

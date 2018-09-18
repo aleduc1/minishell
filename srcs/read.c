@@ -6,7 +6,7 @@
 /*   By: aleduc <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/25 17:06:41 by aleduc            #+#    #+#             */
-/*   Updated: 2018/09/18 03:58:09 by aleduc           ###   ########.fr       */
+/*   Updated: 2018/09/18 07:15:58 by aleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,11 +77,11 @@ void	read_fct(t_env *env_s, t_lst **head)
 					if ((env_s->tab[0]))
 						ft_search_bin(env_s, head);
 				}
+				if (env_s->tab)
+					free(env_s->tab);
 			}
 		}
 		if (env_s->line)
 			free(env_s->line);
-		if (env_s->tab)
-			free_double_tab(env_s->tab);
 	}
 }

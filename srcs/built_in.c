@@ -6,11 +6,27 @@
 /*   By: aleduc <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/27 00:59:45 by aleduc            #+#    #+#             */
-/*   Updated: 2018/09/18 06:05:32 by aleduc           ###   ########.fr       */
+/*   Updated: 2018/09/18 06:52:07 by aleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	del_lst(t_lst **head)
+{
+	t_lst	*curlist;
+
+	curlist = *head;
+	while (curlist)
+	{
+		ft_strdel(&(curlist->key));
+		ft_strdel(&(curlist->value));
+		*head = curlist->next;
+		curlist->next = NULL;
+		free(curlist);
+		curlist = *head;
+	}
+}
 
 int		ft_getarg(char *str)
 {
@@ -133,13 +149,17 @@ void	ft_exit(t_env *env_s, t_lst **head)
 			if (env_s->tab[1][0])
 			{
 				arg = ft_getarg(env_s->tab[1]);
-				free(env_s->ptrf);
-				free(env_s->tab);
+				free_struct(env_s);
+				del_lst(head);
 				exit(arg);
 			}
 		}
 		else
+		{
+			free_struct(env_s);
+			del_lst(head);
 			exit(0);
+		}
 	}
 }
 
