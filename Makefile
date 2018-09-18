@@ -6,7 +6,7 @@
 #    By: aleduc <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/13 16:40:19 by aleduc            #+#    #+#              #
-#    Updated: 2018/09/14 14:53:36 by aleduc           ###   ########.fr        #
+#    Updated: 2018/09/18 03:38:58 by aleduc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ OBJ_NAME = $(SRC_NAME:.c=.o)
 SRC = $(addprefix $(SRC_PATH),$(SRC_NAME))
 OBJ = $(addprefix $(OBJ_PATH),$(OBJ_NAME))
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -g3
+CFLAGS = -Wall -Wextra -g3
 
 all : $(NAME)
 
