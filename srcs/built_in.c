@@ -6,7 +6,7 @@
 /*   By: aleduc <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/27 00:59:45 by aleduc            #+#    #+#             */
-/*   Updated: 2018/09/14 15:28:19 by aleduc           ###   ########.fr       */
+/*   Updated: 2018/09/18 06:05:32 by aleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,12 +159,11 @@ void	ft_setenv(t_env *env_s, t_lst **head)
 	int		i;
 
 	i = 1;
-	while (env_s->tab[i])
+	while (env_s->tab[i]) // tant que y a des arguments
 	{
-		if (env_s->tab[i])
+		if ((tab = split_once(env_s->tab[i], '=')))// split l'arg sur = une fois
 		{
-			tab = ft_strsplit(env_s->tab[i], '=');
-			if (tab[1])
+			if (tab[1]) // si y a bien key et value
 			{
 				if (lst_check_name(tab[0], head))
 					modify_value(tab[0], tab[1], head);
@@ -173,10 +172,11 @@ void	ft_setenv(t_env *env_s, t_lst **head)
 			}
 			else
 				ft_putendl("Error : Usage = setenv key=value");
-			free_double_tab(tab);
 		}
-		else
+		else // si ya juste key ou pas de = -> mettre l'usage
 			ft_putendl("Error : Usage = setenv key=value");
+		if (tab)
+			free_double_tab(tab);
 		i++;
 	}
 }

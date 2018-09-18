@@ -6,7 +6,7 @@
 /*   By: aleduc <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/20 18:01:18 by aleduc            #+#    #+#             */
-/*   Updated: 2018/09/18 03:01:37 by aleduc           ###   ########.fr       */
+/*   Updated: 2018/09/18 04:48:54 by aleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,6 @@ void	ft_exit(t_env *env_s, t_lst **head);
 void	ft_env(t_env *env_s, t_lst **head);
 
 void	ft_setenv(t_env *env_s, t_lst **head);
-char	**setenv_split(char const *str, char c);
 
 void	ft_unsetenv(t_env *env_s, t_lst **head);
 

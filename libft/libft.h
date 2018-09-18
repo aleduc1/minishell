@@ -6,7 +6,7 @@
 /*   By: aleduc <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/13 16:33:26 by aleduc            #+#    #+#             */
-/*   Updated: 2018/09/18 02:50:53 by aleduc           ###   ########.fr       */
+/*   Updated: 2018/09/18 04:58:34 by aleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,4 +98,5 @@ void				ft_swap(int *a, int *b);
 int					*ft_sort_integer_table(int *tab, int size);
 void				ft_lsttail(t_list **alst, t_list *node);
 void				ft_fill_str(char *dst, char *src1, char *src2);
+char				**split_once(char *str, char c);
 #endif

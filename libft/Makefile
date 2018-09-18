@@ -6,7 +6,7 @@
 #    By: aleduc <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/13 16:40:19 by aleduc            #+#    #+#              #
-#    Updated: 2018/09/18 02:51:10 by aleduc           ###   ########.fr        #
+#    Updated: 2018/09/18 05:41:55 by aleduc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,8 @@ SRC_NAME = ft_bzero.c ft_memcpy.c ft_memccpy.c ft_memchr.c ft_memcmp.c \
 			ft_strtrim.c ft_strsplit.c ft_itoa.c ft_lstnew.c ft_lstdelone.c \
 			ft_lstdel.c ft_lstadd.c ft_lstiter.c ft_lstmap.c ft_isspace.c \
 			ft_strrev.c ft_swap.c ft_sort_integer_table.c ft_lsttail.c \
-			get_next_line.c ft_split_whitespaces.c ft_lstsize.c ft_fill_str.c
+			get_next_line.c ft_split_whitespaces.c ft_lstsize.c ft_fill_str.c \
+			split_once.c
 OBJ_NAME = $(SRC_NAME:.c=.o)
 SRC = $(addprefix $(SRC_PATH),$(SRC_NAME))
 OBJ = $(addprefix $(OBJ_PATH),$(OBJ_NAME))
