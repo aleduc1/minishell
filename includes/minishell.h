@@ -6,7 +6,7 @@
 /*   By: aleduc <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/20 18:01:18 by aleduc            #+#    #+#             */
-/*   Updated: 2018/09/22 16:54:20 by aleduc           ###   ########.fr       */
+/*   Updated: 2018/09/22 18:36:28 by aleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ void	put_in_list(char **scd_cut, t_lst **head);
 
 /* Expanses */
 
-void	expanse(char *line, t_lst **head);
+void	replace(t_env *env_s, char *newline, char *key, char *name, t_lst **head);
+void	expanse(t_env *env_s, t_lst **head);
 int		delimiter(char c);
 char	*to_check(char *str);
 

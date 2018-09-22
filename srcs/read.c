@@ -6,7 +6,7 @@
 /*   By: aleduc <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/25 17:06:41 by aleduc            #+#    #+#             */
-/*   Updated: 2018/09/22 16:54:25 by aleduc           ###   ########.fr       */
+/*   Updated: 2018/09/22 18:58:49 by aleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	read_fct(t_env *env_s, t_lst **head)
 		{
 			if (env_s->line[0])
 			{
-				expanse(env_s->line, head);
+				expanse(env_s, head);
 /*				ft_lexer(env_s) == 0 ? ft_parser(env_s, head) : 0;
 				if (env_s->bin == 0)
 				{
