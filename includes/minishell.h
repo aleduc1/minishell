@@ -6,7 +6,7 @@
 /*   By: aleduc <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/20 18:01:18 by aleduc            #+#    #+#             */
-/*   Updated: 2018/09/18 06:53:18 by aleduc           ###   ########.fr       */
+/*   Updated: 2018/09/22 16:54:20 by aleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,12 @@ void	env_cpy(char **environ, t_lst **env);
 char	**ft_first_cut(char **env);
 void	ft_scd_cut(char **one_cut, t_env *env_s);
 void	put_in_list(char **scd_cut, t_lst **head);
+
+/* Expanses */
+
+void	expanse(char *line, t_lst **head);
+int		delimiter(char c);
+char	*to_check(char *str);
 
 /* List manipulation */
 
