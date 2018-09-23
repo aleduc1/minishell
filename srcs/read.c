@@ -6,18 +6,11 @@
 /*   By: aleduc <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/25 17:06:41 by aleduc            #+#    #+#             */
-/*   Updated: 2018/09/23 23:04:00 by aleduc           ###   ########.fr       */
+/*   Updated: 2018/09/24 00:33:09 by aleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int		correct_path(t_env *env_s)
-{
-	if (access(env_s->tab[0], X_OK) == 0)
-		return (1);
-	return (0);
-}
 
 void	handle_path_bin(t_env *env_s)
 {
@@ -64,7 +57,7 @@ void	ft_search_bin(t_env *env_s, t_lst **head)
 		envpath = get_value_of_key(head, "PATH");
 		paths = ft_strsplit(envpath, ':');
 		free(envpath);
-		if (correct_path(env_s))
+		if (access(env_s->tab[0], X_OK) == 0)
 			handle_path_bin(env_s);
 		while (paths[counts])
 		{
@@ -102,6 +95,8 @@ void	read_fct(t_env *env_s, t_lst **head)
 			if (env_s->line[0])
 			{
 				while (dollars(env_s, head))
+					;
+				while (tilde(env_s, head))
 					;
 				ft_lexer(env_s) == 0 ? ft_parser(env_s, head) : 0;
 				if (env_s->bin == 0)

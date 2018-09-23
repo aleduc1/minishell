@@ -6,7 +6,7 @@
 /*   By: aleduc <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/22 16:41:37 by aleduc            #+#    #+#             */
-/*   Updated: 2018/09/23 18:28:56 by aleduc           ###   ########.fr       */
+/*   Updated: 2018/09/24 01:06:47 by aleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,6 +158,32 @@ int		dollars(t_env *env_s, t_lst **head)
 				return (1);
 			}
 		}
+	}
+	return (0);
+}
+
+int		tilde(t_env *env_s, t_lst **head)
+{
+	/*
+	 * Parcourir toute la chaine									*
+	 * Si jamais on trouve un ~										*
+	 * Le remplacer par $HOME si jamais les regles sont verifier
+	 * Sinon l'ignorer
+	 * */
+
+	int		count;
+	char	*line;
+
+	count = 0;
+	line = NULL;
+	while (env_s->line[count])
+	{
+		if (env_s->line[count] == '~')
+		{
+			if (rules(env_s))
+				replace_tld(env_s, head);
+		}
+		count++;
 	}
 	return (0);
 }

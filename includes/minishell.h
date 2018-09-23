@@ -6,7 +6,7 @@
 /*   By: aleduc <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/20 18:01:18 by aleduc            #+#    #+#             */
-/*   Updated: 2018/09/23 21:25:01 by aleduc           ###   ########.fr       */
+/*   Updated: 2018/09/24 01:06:48 by aleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,18 @@ char	**ft_first_cut(char **env);
 void	ft_scd_cut(char **one_cut, t_env *env_s);
 void	put_in_list(char **scd_cut, t_lst **head);
 
-/* Expanses */
+/* Expanses $ */
 
 char	*replace(t_env *env_s, char *key, char *name, t_lst **head);
 char	*del(t_env *env_s, char *key);
 int		dollars(t_env *env_s, t_lst **head);
 int		delimiter(char c);
 void	set_line(t_env *env_s, char *newline);
+
+/* Expanses $ */
+
+int		rules(t_env *env_s);
+void	replace_tld(t_env *env_s, t_lst **head);
 
 /* List manipulation */
 
@@ -75,7 +80,6 @@ void	del_lst(t_lst **head);
 
 /* Reading input */
 
-int		correct_path(t_env *env_s);
 void	handle_path_bin(t_env *env_s);
 void	ft_search_bin(t_env *env_s, t_lst **head);
 void	read_fct(t_env *env_s, t_lst **head);
