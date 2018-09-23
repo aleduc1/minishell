@@ -6,7 +6,7 @@
 /*   By: aleduc <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/25 17:06:41 by aleduc            #+#    #+#             */
-/*   Updated: 2018/09/23 21:26:51 by aleduc           ###   ########.fr       */
+/*   Updated: 2018/09/23 23:04:00 by aleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void	handle_path_bin(t_env *env_s)
 void	ft_search_bin(t_env *env_s, t_lst **head)
 {
 	char	*envpath;
+	char	cwd[4096];
 	char	**paths;
 	int		counts;
 	int		code;
@@ -73,6 +74,11 @@ void	ft_search_bin(t_env *env_s, t_lst **head)
 		}
 		if (paths[counts])
 			code = ft_fork_exec(paths[counts], env_s, head);
+		else
+		{
+			if (dir_functs(getcwd(cwd, 4096), env_s) == 1)
+				code = ft_fork_exec(cwd, env_s, head);
+		}
 		free_double_tab(paths);
 	}
 	if (code == 0)
