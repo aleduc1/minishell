@@ -6,7 +6,7 @@
 /*   By: aleduc <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/26 15:04:59 by aleduc            #+#    #+#             */
-/*   Updated: 2018/09/18 07:16:37 by aleduc           ###   ########.fr       */
+/*   Updated: 2018/09/23 16:28:23 by aleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int		ft_lexer(t_env *env_s)
 {
 	env_s->tab = ft_split_whitespaces(env_s->line);
+	ft_putendl("tab is malloc'd");
 	env_s->bin = 0b000000;
 /*	ft_rstrcapitalizer(env_s->tab); -> bonus 1*/
 	if (env_s->tab[0])
@@ -52,6 +53,7 @@ void	set_tab_fptr(t_env *env_s)
 
 void	ft_parser(t_env *env_s, t_lst **head)
 {
+	env_s->count = 0;
 	set_tab_fptr(env_s);
 	while (env_s->ptrf[env_s->count].f)
 	{
@@ -60,5 +62,4 @@ void	ft_parser(t_env *env_s, t_lst **head)
 		env_s->count++;
 	}
 	free(env_s->ptrf);
-	env_s->count = 0;
 }

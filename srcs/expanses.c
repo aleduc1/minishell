@@ -6,7 +6,7 @@
 /*   By: aleduc <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/22 16:41:37 by aleduc            #+#    #+#             */
-/*   Updated: 2018/09/22 19:36:33 by aleduc           ###   ########.fr       */
+/*   Updated: 2018/09/23 16:18:34 by aleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,13 @@ char	*replace(t_env *env_s, char *key, char *name, t_lst **head)
 	if (!(newline = ft_memalloc(sizeof(char) * (size + 1))))
 		return (NULL);
 	size = 0;
-	while (env_s->line[size] != '$')
+	while (env_s->line[size])
 	{
+		if (env_s->line[size] == '$')
+		{
+			if (delimiter(env_s->line[size + 1]) == 0)
+				break ;
+		}
 		newline[size] = env_s->line[size];
 		size++;
 	}
@@ -55,12 +60,35 @@ char	*replace(t_env *env_s, char *key, char *name, t_lst **head)
 	return (newline);
 }
 
-char	*to_check(char *str)
+char	*del(t_env *env_s, char *key)
 {
-	char	*name;
+	char	*newline;
+	int		size;
+	int		count;
 
-	name = ft_strsub(str, 1, (ft_strlen(str) - 1));
-	return (name);
+	size = (ft_strlen(env_s->line) - ft_strlen(key));
+	if (!(newline = (char *)ft_memalloc(sizeof(char) * (size + 1))))
+		return (NULL);
+	size = 0;
+	while (env_s->line[size])
+	{
+		if (env_s->line[size] == '$')
+		{
+			if (delimiter(env_s->line[size + 1]) == 0)
+				break ;
+		}
+		newline[size] = env_s->line[size];
+		size++;
+	}
+	count = size;
+	count = count + ft_strlen(key);
+	while (env_s->line[count])
+	{
+		newline[size] = env_s->line[count];
+		size++;
+		count++;
+	}
+	return (newline);
 }
 
 int		delimiter(char c)
@@ -78,7 +106,7 @@ void	set_line(t_env *env_s, char *newline)
 	ft_strcpy(env_s->line, newline);
 }
 
-int		expanse(t_env *env_s, t_lst **head)
+int		dollars(t_env *env_s, t_lst **head)
 {
 	int		start;
 	int		count;
@@ -94,27 +122,40 @@ int		expanse(t_env *env_s, t_lst **head)
 
 	count = 0;
 	start = 0;
-	key = NULL;
-	name = NULL;
-	newline = NULL;
-	while (env_s->line[start] && (env_s->line[start] != '$'))
-		start++;
 	while (env_s->line[start])
 	{
-		start++;
-		count++;
-		if (delimiter(env_s->line[start]))
+		if (env_s->line[start] == '$')
 		{
-			key = ft_strsub(env_s->line, (start - count), count);
-			name = to_check(key);
-			if (lst_check_name(name, head))
+			if (delimiter(env_s->line[start + 1]) == 0)
+				break ;
+		}
+		start++;
+	}
+	if (env_s->line[start])
+	{
+		while (env_s->line[start])
+		{
+			start++;
+			count++;
+			if (delimiter(env_s->line[start]))
 			{
-				newline = replace(env_s, key, name, head);
-				set_line(env_s, newline);
+				key = ft_strsub(env_s->line, (start - count), count);
+				name = ft_strsub(key, 1, (ft_strlen(key) - 1));
+				if (lst_check_name(name, head))
+				{
+					newline = replace(env_s, key, name, head);
+					set_line(env_s, newline);
+				}
+				else
+				{
+					newline = del(env_s, key);
+					set_line(env_s, newline);
+				}
 				free(newline);
+				free(key);
+				free(name);
 				return (1);
 			}
-			return (0);
 		}
 	}
 	return (0);

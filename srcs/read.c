@@ -6,7 +6,7 @@
 /*   By: aleduc <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/25 17:06:41 by aleduc            #+#    #+#             */
-/*   Updated: 2018/09/22 19:37:29 by aleduc           ###   ########.fr       */
+/*   Updated: 2018/09/23 16:45:51 by aleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,7 @@ void	ft_search_bin(t_env *env_s, t_lst **head)
 	char	**paths;
 	int		counts;
 	int		code;
-/*
- * If in a dir you found the command the user entered *
- * Then invok the binary with fork and exec *
- */
 
-/*	Break up every path from $PATH in a doubletab	*/
 	paths = NULL;
 	code = 0;
 	counts = 0;
@@ -34,9 +29,6 @@ void	ft_search_bin(t_env *env_s, t_lst **head)
 		envpath = get_value_of_key(head, "PATH");
 		paths = ft_strsplit(envpath, ':');
 		free(envpath);
-/*		while (paths[counts])
-				ft_putendl(paths[counts++]);*/
-/*	Open and read directory pointed to by $PATH	*/
 		while (paths[counts])
 		{
 			if (dir_functs(paths[counts], env_s) == 1)
@@ -45,13 +37,12 @@ void	ft_search_bin(t_env *env_s, t_lst **head)
 		}
 		if (paths[counts])
 			code = ft_fork_exec(paths[counts], env_s, head);
+		free_double_tab(paths);
 	}
 	else
 		ft_putendl("No variable named PATH in your environment");
 	if (code == 0)
 	{
-/*	If you finished all path from $PATH	*/
-/*	And you didnt found any built_in or binary, display error message	*/
 		ft_putstr("minishell: command not found");
 		if (env_s->tab[0])
 		{
@@ -59,7 +50,6 @@ void	ft_search_bin(t_env *env_s, t_lst **head)
 			ft_putendl(env_s->tab[0]);
 		}
 	}
-	free_double_tab(paths);
 }
 
 void	read_fct(t_env *env_s, t_lst **head)
@@ -71,16 +61,19 @@ void	read_fct(t_env *env_s, t_lst **head)
 		{
 			if (env_s->line[0])
 			{
-				while (expanse(env_s, head)) ;
-				ft_putendl(env_s->line);
-/*				ft_lexer(env_s) == 0 ? ft_parser(env_s, head) : 0;
+				while (dollars(env_s, head))
+					;
+				ft_lexer(env_s) == 0 ? ft_parser(env_s, head) : 0;
 				if (env_s->bin == 0)
 				{
 					if ((env_s->tab[0]))
 						ft_search_bin(env_s, head);
 				}
 				if (env_s->tab)
-					free(env_s->tab);*/
+				{
+					ft_putendl("Freeing tab");
+					free(env_s->tab);
+				}
 			}
 		}
 		if (env_s->line)
