@@ -6,7 +6,7 @@
 /*   By: aleduc <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/12 12:20:24 by aleduc            #+#    #+#             */
-/*   Updated: 2018/09/23 18:12:20 by aleduc           ###   ########.fr       */
+/*   Updated: 2018/09/23 21:24:46 by aleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,24 +66,21 @@ int		ft_fork_exec(char *filename, t_env *env_s, t_lst **head)
 	char	*path;
 
 	path = NULL;
-	if (filename && env_s && head)
+	if (!(path = create_path(filename, env_s->tab[0])))
 	{
-		if (!(path = create_path(filename, env_s->tab[0])))
-		{
-			ft_error(4);
-			return (0);
-		}
-		if (!(access(path, X_OK) == 0))
-		{
-			free(path);
-			return (0);
-		}
-		else
-		{
-			call_bin(path, env_s, head);
-			free(path);
-			return (1);
-		}
+		ft_error(4);
+		return (0);
+	}
+	if (!(access(path, X_OK) == 0))
+	{
+		free(path);
+		return (0);
+	}
+	else
+	{
+		call_bin(path, env_s, head);
+		free(path);
+		return (1);
 	}
 	return (0);
 }

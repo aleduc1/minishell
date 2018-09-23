@@ -6,11 +6,45 @@
 /*   By: aleduc <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/25 17:06:41 by aleduc            #+#    #+#             */
-/*   Updated: 2018/09/23 18:33:26 by aleduc           ###   ########.fr       */
+/*   Updated: 2018/09/23 21:26:51 by aleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int		correct_path(t_env *env_s)
+{
+	if (access(env_s->tab[0], X_OK) == 0)
+		return (1);
+	return (0);
+}
+
+void	handle_path_bin(t_env *env_s)
+{
+	int		count;
+	char	*line;
+
+	count = ft_strlen(env_s->tab[0]);
+	line = NULL;
+	if (ft_strchr(env_s->tab[0], '/'))
+	{
+		while (count != -1)
+		{
+			if (env_s->tab[0][count] == '/')
+			{
+				count++;
+				break ;
+			}
+			count--;
+		}
+		line = ft_strsub(env_s->tab[0], count, (ft_strlen(env_s->tab[0]) - count + 1));
+	}
+	else
+		line = ft_strdup(env_s->tab[0]);
+	free(env_s->tab[0]);
+	env_s->tab[0] = ft_strdup(line);
+	free(line);
+}
 
 /*	 Search bin in $PATH To fork and exec on it	*/
 
@@ -29,6 +63,8 @@ void	ft_search_bin(t_env *env_s, t_lst **head)
 		envpath = get_value_of_key(head, "PATH");
 		paths = ft_strsplit(envpath, ':');
 		free(envpath);
+		if (correct_path(env_s))
+			handle_path_bin(env_s);
 		while (paths[counts])
 		{
 			if (dir_functs(paths[counts], env_s) == 1)
@@ -39,8 +75,6 @@ void	ft_search_bin(t_env *env_s, t_lst **head)
 			code = ft_fork_exec(paths[counts], env_s, head);
 		free_double_tab(paths);
 	}
-	else
-		ft_putendl("No variable named PATH in your environment");
 	if (code == 0)
 	{
 		ft_putstr("minishell: command not found");
@@ -70,10 +104,7 @@ void	read_fct(t_env *env_s, t_lst **head)
 						ft_search_bin(env_s, head);
 				}
 				if (env_s->tab)
-				{
-					ft_putendl("Freeing tab");
 					free_double_tab(env_s->tab);
-				}
 			}
 		}
 		if (env_s->line)

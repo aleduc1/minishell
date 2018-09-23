@@ -6,7 +6,7 @@
 /*   By: aleduc <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/20 18:01:18 by aleduc            #+#    #+#             */
-/*   Updated: 2018/09/23 15:12:30 by aleduc           ###   ########.fr       */
+/*   Updated: 2018/09/23 21:25:01 by aleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@ void	del_lst(t_lst **head);
 
 /* Reading input */
 
+int		correct_path(t_env *env_s);
+void	handle_path_bin(t_env *env_s);
 void	ft_search_bin(t_env *env_s, t_lst **head);
 void	read_fct(t_env *env_s, t_lst **head);
 
