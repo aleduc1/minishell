@@ -6,7 +6,7 @@
 /*   By: aleduc <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/25 17:06:41 by aleduc            #+#    #+#             */
-/*   Updated: 2018/09/23 16:45:51 by aleduc           ###   ########.fr       */
+/*   Updated: 2018/09/23 18:33:26 by aleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	read_fct(t_env *env_s, t_lst **head)
 				if (env_s->tab)
 				{
 					ft_putendl("Freeing tab");
-					free(env_s->tab);
+					free_double_tab(env_s->tab);
 				}
 			}
 		}

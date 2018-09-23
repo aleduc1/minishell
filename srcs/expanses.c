@@ -6,7 +6,7 @@
 /*   By: aleduc <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/22 16:41:37 by aleduc            #+#    #+#             */
-/*   Updated: 2018/09/23 16:18:34 by aleduc           ###   ########.fr       */
+/*   Updated: 2018/09/23 18:28:56 by aleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ char	*replace(t_env *env_s, char *key, char *name, t_lst **head)
 		size++;
 		dollars++;
 	}
+	free(value);
 	return (newline);
 }
 

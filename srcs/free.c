@@ -6,7 +6,7 @@
 /*   By: aleduc <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/17 17:45:37 by aleduc            #+#    #+#             */
-/*   Updated: 2018/09/23 16:59:28 by aleduc           ###   ########.fr       */
+/*   Updated: 2018/09/23 18:13:29 by aleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@ void	free_double_tab(char **tab)
 	count = 0;
 	while (tab[count])
 	{
-		free(tab[count]);
-		tab[count] = 0;
+		ft_strdel(&(tab[count]));
 		count++;
 	}
 	free(tab);

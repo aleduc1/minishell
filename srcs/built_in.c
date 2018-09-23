@@ -6,7 +6,7 @@
 /*   By: aleduc <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/27 00:59:45 by aleduc            #+#    #+#             */
-/*   Updated: 2018/09/23 16:59:10 by aleduc           ###   ########.fr       */
+/*   Updated: 2018/09/23 17:58:41 by aleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,16 @@
 void	del_lst(t_lst **head)
 {
 	t_lst	*curlist;
+	t_lst	*prevlist;
 
 	curlist = *head;
 	while (curlist)
 	{
 		ft_strdel(&(curlist->key));
 		ft_strdel(&(curlist->value));
-		*head = curlist->next;
-		curlist->next = NULL;
+		prevlist = curlist->next;
 		free(curlist);
-		curlist = *head;
+		curlist = prevlist;
 	}
 }
 

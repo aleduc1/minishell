@@ -6,7 +6,7 @@
 /*   By: aleduc <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/25 16:27:24 by aleduc            #+#    #+#             */
-/*   Updated: 2018/09/18 02:54:14 by aleduc           ###   ########.fr       */
+/*   Updated: 2018/09/23 18:19:44 by aleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,7 @@ char	**list_to_char(t_lst **head)
 			return (NULL);
 		ft_fill_str(tab[count], curlist->key, curlist->value);
 		curlist = curlist->next;
+		count++;
 	}
 	return (tab);
 }
