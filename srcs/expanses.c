@@ -6,7 +6,7 @@
 /*   By: aleduc <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/22 16:41:37 by aleduc            #+#    #+#             */
-/*   Updated: 2018/09/24 01:06:47 by aleduc           ###   ########.fr       */
+/*   Updated: 2018/09/24 03:56:02 by aleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,6 @@
 
 char	*replace(t_env *env_s, char *key, char *name, t_lst **head)
 {
-	/*
-	 * But = avoir dans newline le line mais en ayant remplace $key par sa value *
-	 * Malloc le newline de la bonne taille					*
-	 * Cpy tant que on est pas sur le $						*
-	 * une fois sur le $ ecrire la value de key				*
-	 * une fois la value de la key ecrite cpy jusqua la fin	*
-	 * */
 	int		dollars;
 	int		size;
 	int		count;
@@ -114,12 +107,6 @@ int		dollars(t_env *env_s, t_lst **head)
 	char	*key;
 	char	*name;
 	char	*newline;
-	/*
-	 * when $ is found														*
-	 * everything in between $ and end delimiter has to be check			*
-	 * if it is an env variable												*
-	 * replace from $ to (delimiter - 1) with the value of that variable	*
-	 * */
 
 	count = 0;
 	start = 0;
@@ -140,6 +127,7 @@ int		dollars(t_env *env_s, t_lst **head)
 			count++;
 			if (delimiter(env_s->line[start]))
 			{
+//				ft_putendl("Error : A var in your ENV is needed");
 				key = ft_strsub(env_s->line, (start - count), count);
 				name = ft_strsub(key, 1, (ft_strlen(key) - 1));
 				if (lst_check_name(name, head))
@@ -162,15 +150,58 @@ int		dollars(t_env *env_s, t_lst **head)
 	return (0);
 }
 
-int		tilde(t_env *env_s, t_lst **head)
+int		rules(t_env *env_s, int count)
 {
-	/*
-	 * Parcourir toute la chaine									*
-	 * Si jamais on trouve un ~										*
-	 * Le remplacer par $HOME si jamais les regles sont verifier
-	 * Sinon l'ignorer
-	 * */
+	if (count == 0 || env_s->line[count - 1] == ' ' || env_s->line[count - 1] == '\t')
+	{
+		if (env_s->line[count + 1] == '\0')
+			return (1);
+		if (env_s->line[count + 1] == '/')
+			return (1);
+		if (env_s->line[count + 1] == ' ' || env_s->line[count + 1] == '\t')
+			return (1);
+	}
+	return (0);
+}
 
+char	*replace_tld(int count, t_env *env_s, t_lst **head)
+{
+	int		size;
+	int		start;
+	char	*line;
+	char	*home;
+
+	start = 0;
+	if (!(home = get_value_of_key(head, "HOME")))
+		return (NULL);
+	size = (ft_strlen(home) + ft_strlen(env_s->line));
+	if (!(line = (char *)ft_memalloc(sizeof(char) * size)))
+		return (NULL);
+	size = 0;
+	while (size < count)
+	{
+		line[size] = env_s->line[size];
+		size++;
+	}
+	while (home[start])
+	{
+		line[size] = home[start];
+		start++;
+		size++;
+	}
+	count++;
+	while (env_s->line[count])
+	{
+		line[size] = env_s->line[count];
+		size++;
+		count++;
+	}
+	free(home);
+	return (line);
+}
+
+void	tilde(t_env *env_s, t_lst **head)
+{
 	int		count;
 	char	*line;
 
@@ -180,10 +211,17 @@ int		tilde(t_env *env_s, t_lst **head)
 	{
 		if (env_s->line[count] == '~')
 		{
-			if (rules(env_s))
-				replace_tld(env_s, head);
+			if (rules(env_s, count))
+			{
+				if (!(line = replace_tld(count, env_s, head)))
+				{
+					ft_putendl("Error : A var in your ENV is needed");
+					return ;
+				}
+				set_line(env_s, line);
+				free(line);
+			}
 		}
 		count++;
 	}
-	return (0);
 }

@@ -6,38 +6,11 @@
 /*   By: aleduc <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/25 17:06:41 by aleduc            #+#    #+#             */
-/*   Updated: 2018/09/24 00:33:09 by aleduc           ###   ########.fr       */
+/*   Updated: 2018/09/24 04:15:49 by aleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	handle_path_bin(t_env *env_s)
-{
-	int		count;
-	char	*line;
-
-	count = ft_strlen(env_s->tab[0]);
-	line = NULL;
-	if (ft_strchr(env_s->tab[0], '/'))
-	{
-		while (count != -1)
-		{
-			if (env_s->tab[0][count] == '/')
-			{
-				count++;
-				break ;
-			}
-			count--;
-		}
-		line = ft_strsub(env_s->tab[0], count, (ft_strlen(env_s->tab[0]) - count + 1));
-	}
-	else
-		line = ft_strdup(env_s->tab[0]);
-	free(env_s->tab[0]);
-	env_s->tab[0] = ft_strdup(line);
-	free(line);
-}
 
 /*	 Search bin in $PATH To fork and exec on it	*/
 
@@ -52,13 +25,18 @@ void	ft_search_bin(t_env *env_s, t_lst **head)
 	paths = NULL;
 	code = 0;
 	counts = 0;
-	if (lst_check_name("PATH", head))
+	if (access(env_s->tab[0], X_OK) == 0)
+	{
+		call_bin(env_s->tab[0], env_s, head);
+		code = 1;
+	}
+	if (dir_functs(getcwd(cwd, 4096), env_s) == 1)
+		code = ft_fork_exec(cwd, env_s, head);
+	else if (lst_check_name("PATH", head))
 	{
 		envpath = get_value_of_key(head, "PATH");
 		paths = ft_strsplit(envpath, ':');
 		free(envpath);
-		if (access(env_s->tab[0], X_OK) == 0)
-			handle_path_bin(env_s);
 		while (paths[counts])
 		{
 			if (dir_functs(paths[counts], env_s) == 1)
@@ -67,11 +45,6 @@ void	ft_search_bin(t_env *env_s, t_lst **head)
 		}
 		if (paths[counts])
 			code = ft_fork_exec(paths[counts], env_s, head);
-		else
-		{
-			if (dir_functs(getcwd(cwd, 4096), env_s) == 1)
-				code = ft_fork_exec(cwd, env_s, head);
-		}
 		free_double_tab(paths);
 	}
 	if (code == 0)
@@ -96,8 +69,7 @@ void	read_fct(t_env *env_s, t_lst **head)
 			{
 				while (dollars(env_s, head))
 					;
-				while (tilde(env_s, head))
-					;
+				tilde(env_s, head);
 				ft_lexer(env_s) == 0 ? ft_parser(env_s, head) : 0;
 				if (env_s->bin == 0)
 				{

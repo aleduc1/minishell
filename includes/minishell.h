@@ -6,7 +6,7 @@
 /*   By: aleduc <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/20 18:01:18 by aleduc            #+#    #+#             */
-/*   Updated: 2018/09/24 01:06:48 by aleduc           ###   ########.fr       */
+/*   Updated: 2018/09/24 04:15:44 by aleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,11 @@ int		dollars(t_env *env_s, t_lst **head);
 int		delimiter(char c);
 void	set_line(t_env *env_s, char *newline);
 
-/* Expanses $ */
+/* Expanses ~ */
 
-int		rules(t_env *env_s);
-void	replace_tld(t_env *env_s, t_lst **head);
+void	tilde(t_env *env_s, t_lst **head);
+int		rules(t_env *env_s, int count);
+char	*replace_tld(int count, t_env *env_s, t_lst **head);
 
 /* List manipulation */
 
@@ -80,7 +81,6 @@ void	del_lst(t_lst **head);
 
 /* Reading input */
 
-void	handle_path_bin(t_env *env_s);
 void	ft_search_bin(t_env *env_s, t_lst **head);
 void	read_fct(t_env *env_s, t_lst **head);
 

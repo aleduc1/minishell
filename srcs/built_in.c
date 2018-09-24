@@ -6,7 +6,7 @@
 /*   By: aleduc <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/27 00:59:45 by aleduc            #+#    #+#             */
-/*   Updated: 2018/09/23 17:58:41 by aleduc           ###   ########.fr       */
+/*   Updated: 2018/09/24 04:04:11 by aleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,11 @@ void	ft_cd_pt_3(t_lst **head)
 {
 	char	*home;
 
-	home = get_value_of_key(head, "HOME");
+	if (!(home = get_value_of_key(head, "HOME")))
+	{
+		ft_putendl("Error : A var in your ENV is needed");
+		return ;
+	}
 	chdir(home);
 	setoldpwd(head);
 	modify_value("PWD", home, head);
