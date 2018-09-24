@@ -6,7 +6,7 @@
 /*   By: aleduc <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/27 00:59:45 by aleduc            #+#    #+#             */
-/*   Updated: 2018/09/24 04:04:11 by aleduc           ###   ########.fr       */
+/*   Updated: 2018/09/24 05:38:35 by aleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,12 +167,31 @@ void	ft_exit(t_env *env_s, t_lst **head)
 	}
 }
 
-/* Simplified version, just print env for now */
+/* Exec a new process with a new env */
 
 void	ft_env(t_env *env_s, t_lst **head)
 {
-	if (env_s)
+//	pid_t	pid;
+
+	if (!(env_s->tab[1]))
 		ft_print_env(head);
+/*	else
+	{
+		pid = fork();
+		if (pid == -1)
+		{
+			ft_putendl("Fork failed to execute");
+			return ;
+		}
+		if (pid == 0)
+		{
+			if (!(manage_setenv(head, env_s)))
+				ft_print_env(head);
+			else
+				search_bin_env(env_s, head);
+		}
+		wait(NULL);
+	}*/
 }
 
 /* If key exist replace his value, else add a whole new node in the env list */

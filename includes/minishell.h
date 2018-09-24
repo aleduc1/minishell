@@ -6,7 +6,7 @@
 /*   By: aleduc <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/20 18:01:18 by aleduc            #+#    #+#             */
-/*   Updated: 2018/09/24 04:15:44 by aleduc           ###   ########.fr       */
+/*   Updated: 2018/09/24 05:38:38 by aleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,8 @@ void	ft_echo_pt_2(t_env *env_s);
 void	ft_exit(t_env *env_s, t_lst **head);
 
 void	ft_env(t_env *env_s, t_lst **head);
+int		manage_setenv(t_lst **head, t_env *env_s);
+void	search_bin_env(t_env *env_s, t_lst **head);
 
 void	ft_setenv(t_env *env_s, t_lst **head);
 
