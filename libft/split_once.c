@@ -6,7 +6,7 @@
 /*   By: aleduc <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/18 04:49:38 by aleduc            #+#    #+#             */
-/*   Updated: 2018/09/18 06:20:37 by aleduc           ###   ########.fr       */
+/*   Updated: 2018/09/25 22:30:10 by aleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,12 +63,7 @@ static int	malloc_first(char *str, char c, char **tab)
 static int	exist(char *str, char c)
 {
 	if (!(ft_strchr(str, c)))
-	{
-		ft_putchar(c);
-		ft_putstr(" doesnt exist in : ");
-		ft_putendl(str);
 		return (1);
-	}
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: aleduc <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/27 00:59:45 by aleduc            #+#    #+#             */
-/*   Updated: 2018/09/24 05:38:35 by aleduc           ###   ########.fr       */
+/*   Updated: 2018/09/25 22:30:15 by aleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,27 +171,96 @@ void	ft_exit(t_env *env_s, t_lst **head)
 
 void	ft_env(t_env *env_s, t_lst **head)
 {
-//	pid_t	pid;
+	t_lst	*newlist;
+	t_env	newenv;
+	int		setenv_ret;
 
+	setenv_ret = 0;
+	newlist = NULL;
 	if (!(env_s->tab[1]))
 		ft_print_env(head);
-/*	else
+	else
 	{
-		pid = fork();
-		if (pid == -1)
+		cpy_lst(&newlist, head);
+		if ((setenv_ret = manage_setenv(&newlist, env_s)) == 0)
+			ft_print_env(&newlist);
+		else
 		{
-			ft_putendl("Fork failed to execute");
-			return ;
+			ft_print_env(&newlist);
+			create_newenv(&newenv, env_s, setenv_ret);
+			exec_env(&newenv, &newlist);
 		}
-		if (pid == 0)
+	}
+}
+
+void	create_newenv(t_env *dst, t_env *src, int here)
+{
+	int		size;
+	int		i;
+	int		start;
+
+	size = 0;
+	i = 0;
+	start = here;
+	while (src->tab[here])
+	{
+		size = size + ft_strlen(src->tab[here]) + 1;
+		here++;
+	}
+	if (!(dst->line = (char *)ft_memalloc(sizeof(char) * (size + 1))))
+		return ;
+	while (src->tab[start])
+	{
+		ft_strcat(dst->line, src->tab[start]);
+		i = ft_strlen(dst->line);
+		dst->line[i] = ' ';
+		start++;
+	}
+}
+
+void	exec_env(t_env *newenv, t_lst **newlist)
+{
+	ft_lexer(newenv) == 0 ? ft_parser(newenv, newlist) : 0;
+	if (newenv->bin == 0)
+	{
+		if ((newenv->tab[0]) && ft_strcmp(newenv->tab[0], "/"))
+			ft_search_bin(newenv, newlist);
+	}
+	if (newenv->tab)
+		free_double_tab(newenv->tab);
+	if (newenv->line)
+		free(newenv->line);
+}
+
+int		manage_setenv(t_lst **newlist, t_env *env_s)
+{
+	char	**tab;
+	int		i;
+	int		return_value;
+
+	return_value = 0;
+	i = 1;
+	while (env_s->tab[i] && return_value == 0)
+	{
+		if ((tab = split_once(env_s->tab[i], '=')))
 		{
-			if (!(manage_setenv(head, env_s)))
-				ft_print_env(head);
+			if (tab[1])
+			{
+				if (lst_check_name(tab[0], newlist))
+					modify_value(tab[0], tab[1], newlist);
+				else
+					put_in_list(tab, newlist);
+			}
 			else
-				search_bin_env(env_s, head);
+				return_value = i;
 		}
-		wait(NULL);
-	}*/
+		else
+			return_value = i;
+		if (tab)
+			free_double_tab(tab);
+		i++;
+	}
+	return (return_value);
 }
 
 /* If key exist replace his value, else add a whole new node in the env list */

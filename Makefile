@@ -6,15 +6,15 @@
 #    By: aleduc <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/13 16:40:19 by aleduc            #+#    #+#              #
-#    Updated: 2018/09/22 19:01:39 by aleduc           ###   ########.fr        #
+#    Updated: 2018/09/25 20:31:05 by aleduc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 SRC_PATH = srcs/
 OBJ_PATH = obj/
-SRC_NAME = main.c env.c read.c lexer.c built_in.c free.c list.c list_2.c dir.c\
-		   expanses.c
+SRC_NAME = main.c env.c read.c lexer.c built_in.c free.c list.c list_2.c\
+		   list_3.c dir.c expanses.c
 OBJ_NAME = $(SRC_NAME:.c=.o)
 SRC = $(addprefix $(SRC_PATH),$(SRC_NAME))
 OBJ = $(addprefix $(OBJ_PATH),$(OBJ_NAME))

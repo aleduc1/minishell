@@ -6,7 +6,7 @@
 /*   By: aleduc <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/20 18:01:18 by aleduc            #+#    #+#             */
-/*   Updated: 2018/09/24 05:38:38 by aleduc           ###   ########.fr       */
+/*   Updated: 2018/09/25 21:45:09 by aleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ struct s_fptr
 void	env_cpy(char **environ, t_lst **env);
 char	**ft_first_cut(char **env);
 void	ft_scd_cut(char **one_cut, t_env *env_s);
-void	put_in_list(char **scd_cut, t_lst **head);
+void	put_in_list(char **scd_cut, t_lst **start);
 
 /* Expanses $ */
 
@@ -67,6 +67,8 @@ char	*replace_tld(int count, t_env *env_s, t_lst **head);
 /* List manipulation */
 
 t_lst	*create_node(char **scd_cut);
+t_lst	*create_new_node(char *key, char *value);
+void	put_in_newlist(char *key, char *value, t_lst **start);
 void	add_node(t_lst **head, t_lst *node);
 void	ft_print_env(t_lst **head);
 void	del_a_node(char *key, t_lst **head);
@@ -78,11 +80,13 @@ void	setoldpwd(t_lst **head);
 void	setpwd(char *cwd, t_lst **head);
 char	**list_to_char(t_lst **head);
 void	del_lst(t_lst **head);
+void	cpy_lst(t_lst **dst, t_lst **src);
 
 /* Reading input */
 
 void	ft_search_bin(t_env *env_s, t_lst **head);
 void	read_fct(t_env *env_s, t_lst **head);
+void	exec_env(t_env *newenv, t_lst **newlist);
 
 /* Dir functions */
 
@@ -112,8 +116,8 @@ void	ft_echo_pt_2(t_env *env_s);
 void	ft_exit(t_env *env_s, t_lst **head);
 
 void	ft_env(t_env *env_s, t_lst **head);
+void	create_newenv(t_env *dst, t_env *src, int here);
 int		manage_setenv(t_lst **head, t_env *env_s);
-void	search_bin_env(t_env *env_s, t_lst **head);
 
 void	ft_setenv(t_env *env_s, t_lst **head);
 

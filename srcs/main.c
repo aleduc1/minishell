@@ -6,7 +6,7 @@
 /*   By: aleduc <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/19 18:17:33 by aleduc            #+#    #+#             */
-/*   Updated: 2018/09/18 06:34:29 by aleduc           ###   ########.fr       */
+/*   Updated: 2018/09/25 22:33:56 by aleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ int		main(int ac, char **av, char **environ)
 	if (ac && av)
 	{
 		env_cpy(environ, &env);
-		ft_print_env(&env);
 		read_fct(&env_s, &env);
 	}
 	return (0);
