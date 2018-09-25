@@ -6,13 +6,11 @@
 /*   By: aleduc <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/25 17:06:41 by aleduc            #+#    #+#             */
-/*   Updated: 2018/09/25 22:22:58 by aleduc           ###   ########.fr       */
+/*   Updated: 2018/09/25 22:45:20 by aleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-/*	 Search bin in $PATH To fork and exec on it	*/
 
 void	ft_search_bin(t_env *env_s, t_lst **head)
 {
