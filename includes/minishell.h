@@ -15,6 +15,7 @@
 # include "../libft/libft.h"
 # include <dirent.h>
 # include <sys/types.h>
+# include <sys/wait.h>
 
 # define B_CD		0b000001
 # define B_ECHO		0b000010
@@ -84,6 +85,7 @@ void	cpy_lst(t_lst **dst, t_lst **src);
 
 /* Reading input */
 
+int	isdir(const char *file);
 void	ft_search_bin(t_env *env_s, t_lst **head);
 void	read_fct(t_env *env_s, t_lst **head);
 void	exec_env(t_env *newenv, t_lst **newlist);

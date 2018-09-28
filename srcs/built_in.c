@@ -167,8 +167,6 @@ void	ft_exit(t_env *env_s, t_lst **head)
 	}
 }
 
-/* Exec a new process with a new env */
-
 void	ft_env(t_env *env_s, t_lst **head)
 {
 	t_lst	*newlist;
@@ -186,9 +184,10 @@ void	ft_env(t_env *env_s, t_lst **head)
 			ft_print_env(&newlist);
 		else
 		{
-			ft_print_env(&newlist);
+			ft_print_env(&newlist); // a dl
 			create_newenv(&newenv, env_s, setenv_ret);
 			exec_env(&newenv, &newlist);
+			del_lst(&newlist);
 		}
 	}
 }

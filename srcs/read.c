@@ -12,25 +12,31 @@
 
 #include "minishell.h"
 
+int	isdir(const char *file)
+{
+	struct stat	buff;
+
+	if (lstat(file, &buff) == -1)
+		return (0);
+	else
+	{
+		if ((buff.st_mode & 0170000) == 0040000)
+			return (1);
+	}
+	return (0);
+}
+
 void	ft_search_bin(t_env *env_s, t_lst **head)
 {
 	char	*envpath;
-	char	cwd[4096];
 	char	**paths;
-	int		counts;
-	int		code;
+	int	counts;
+	int	code;
 
 	paths = NULL;
 	code = 0;
 	counts = 0;
-	if (access(env_s->tab[0], X_OK) == 0)
-	{
-		call_bin(env_s->tab[0], env_s, head);
-		code = 1;
-	}
-	if (dir_functs(getcwd(cwd, 4096), env_s) == 1)
-		code = ft_fork_exec(cwd, env_s, head);
-	else if (lst_check_name("PATH", head))
+	if (lst_check_name("PATH", head))
 	{
 		envpath = get_value_of_key(head, "PATH");
 		paths = ft_strsplit(envpath, ':');
@@ -44,6 +50,12 @@ void	ft_search_bin(t_env *env_s, t_lst **head)
 		if (paths[counts])
 			code = ft_fork_exec(paths[counts], env_s, head);
 		free_double_tab(paths);
+	}
+	if (code == 0 && (access(env_s->tab[0], X_OK) == 0) && (isdir(env_s->tab[0]) == 0))
+	{
+		ft_putendl("YOYYOYO");
+		call_bin(env_s->tab[0], env_s, head);
+		code = 1;
 	}
 	if (code == 0)
 	{

@@ -89,9 +89,7 @@ void	call_bin(char *binpath, t_env *env_s, t_lst **head)
 {
 	pid_t	pid;
 	char	**env;
-	int		i;
 
-	i = 0;
 	env = list_to_char(head);
 	pid = fork();
 	if (pid == -1)
