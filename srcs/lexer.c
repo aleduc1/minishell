@@ -6,7 +6,7 @@
 /*   By: aleduc <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/26 15:04:59 by aleduc            #+#    #+#             */
-/*   Updated: 2018/09/23 19:46:33 by aleduc           ###   ########.fr       */
+/*   Updated: 2018/09/29 14:34:27 by aleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ int		ft_lexer(t_env *env_s)
 {
 	env_s->tab = ft_split_whitespaces(env_s->line);
 	env_s->bin = 0b000000;
-/*	ft_rstrcapitalizer(env_s->tab); -> bonus 1*/
 	if (env_s->tab[0])
 	{
 		env_s->bin = env_s->bin

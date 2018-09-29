@@ -6,7 +6,7 @@
 /*   By: aleduc <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/27 00:59:45 by aleduc            #+#    #+#             */
-/*   Updated: 2018/09/29 12:20:14 by aleduc           ###   ########.fr       */
+/*   Updated: 2018/09/29 14:55:20 by aleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,7 +184,6 @@ void	ft_env(t_env *env_s, t_lst **head)
 			ft_print_env(&newlist);
 		else
 		{
-			ft_print_env(&newlist); // a dl
 			create_newenv(&newenv, env_s, setenv_ret);
 			exec_env(&newenv, &newlist);
 		}
@@ -231,6 +230,19 @@ void	exec_env(t_env *newenv, t_lst **newlist)
 		free(newenv->line);
 }
 
+void	man_set_2(char **tab, t_lst **newlist, int *return_value, int *i)
+{
+	if (tab[1])
+	{
+		if (lst_check_name(tab[0], newlist))
+			modify_value(tab[0], tab[1], newlist);
+		else
+			put_in_list(tab, newlist);
+	}
+	else
+		*return_value = *i;
+}
+
 int		manage_setenv(t_lst **newlist, t_env *env_s)
 {
 	char	**tab;
@@ -242,17 +254,7 @@ int		manage_setenv(t_lst **newlist, t_env *env_s)
 	while (env_s->tab[i] && return_value == 0)
 	{
 		if ((tab = split_once(env_s->tab[i], '=')))
-		{
-			if (tab[1])
-			{
-				if (lst_check_name(tab[0], newlist))
-					modify_value(tab[0], tab[1], newlist);
-				else
-					put_in_list(tab, newlist);
-			}
-			else
-				return_value = i;
-		}
+			man_set_2(tab, newlist, &return_value, &i);
 		else
 			return_value = i;
 		if (tab)
@@ -262,19 +264,17 @@ int		manage_setenv(t_lst **newlist, t_env *env_s)
 	return (return_value);
 }
 
-/* If key exist replace his value, else add a whole new node in the env list */
-
 void	ft_setenv(t_env *env_s, t_lst **head)
 {
 	char	**tab;
 	int		i;
 
 	i = 1;
-	while (env_s->tab[i]) // tant que y a des arguments
+	while (env_s->tab[i])
 	{
-		if ((tab = split_once(env_s->tab[i], '=')))// split l'arg sur = une fois
+		if ((tab = split_once(env_s->tab[i], '=')))
 		{
-			if (tab[1]) // si y a bien key et value
+			if (tab[1])
 			{
 				if (lst_check_name(tab[0], head))
 					modify_value(tab[0], tab[1], head);
@@ -284,15 +284,13 @@ void	ft_setenv(t_env *env_s, t_lst **head)
 			else
 				ft_putendl("Error : Usage = setenv key=value");
 		}
-		else // si ya juste key ou pas de = -> mettre l'usage
+		else
 			ft_putendl("Error : Usage = setenv key=value");
 		if (tab)
 			free_double_tab(tab);
 		i++;
 	}
 }
-
-/* if key exist, add fonction to del a node */
 
 void	ft_unsetenv(t_env *env_s, t_lst **head)
 {

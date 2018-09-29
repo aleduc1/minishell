@@ -6,13 +6,11 @@
 /*   By: aleduc <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/25 14:52:38 by aleduc            #+#    #+#             */
-/*   Updated: 2018/09/25 20:24:04 by aleduc           ###   ########.fr       */
+/*   Updated: 2018/09/29 14:35:17 by aleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-/* Fonction pour create node */
 
 t_lst	*create_node(char **scd_cut)
 {
@@ -20,21 +18,19 @@ t_lst	*create_node(char **scd_cut)
 
 	if (!(node = (t_lst *)ft_memalloc(sizeof(t_lst))))
 		return (NULL);
-	if (!(node->key = (char *)ft_memalloc(sizeof(char) * (ft_strlen(scd_cut[0]) + 1))))
+	if (!(node->key = (char *)ft_memalloc(sizeof(char) \
+					* (ft_strlen(scd_cut[0]) + 1))))
 		node->key = NULL;
 	else
 		node->key = ft_strcpy(node->key, scd_cut[0]);
-//	printf("scd_cut[0] = |%s|\n", scd_cut[0]);
-//	printf("scd_cut[1] = |%s|\n", scd_cut[1]);
-	if (!(node->value = (char *)ft_memalloc(sizeof(char) * (ft_strlen(scd_cut[1]) + 1))))
+	if (!(node->value = (char *)ft_memalloc(sizeof(char) \
+					* (ft_strlen(scd_cut[1]) + 1))))
 		node->value = NULL;
 	else
 		node->value = ft_strcpy(node->value, scd_cut[1]);
 	node->next = NULL;
 	return (node);
 }
-
-/* Fonction pour ajouter une node */
 
 void	add_node(t_lst **head, t_lst *node)
 {
@@ -45,8 +41,6 @@ void	add_node(t_lst **head, t_lst *node)
 		curlist = curlist->next;
 	curlist->next = node;
 }
-
-/* Print list */
 
 void	ft_print_env(t_lst **head)
 {
@@ -61,8 +55,6 @@ void	ft_print_env(t_lst **head)
 		curlist = curlist->next;
 	}
 }
-
-/* Check if first node of env need to be del */
 
 void	check_first_node(char *key, t_lst **head)
 {
@@ -81,8 +73,6 @@ void	check_first_node(char *key, t_lst **head)
 		}
 	}
 }
-
-/* Del one node of the env linked list */
 
 void	del_a_node(char *key, t_lst **head)
 {

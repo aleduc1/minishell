@@ -6,7 +6,7 @@
 /*   By: aleduc <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/25 19:52:11 by aleduc            #+#    #+#             */
-/*   Updated: 2018/09/25 20:27:19 by aleduc           ###   ########.fr       */
+/*   Updated: 2018/09/29 14:37:59 by aleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ t_lst	*create_new_node(char *key, char *value)
 		node->key = NULL;
 	else
 		node->key = ft_strcpy(node->key, key);
-	if (!(node->value = (char *)ft_memalloc(sizeof(char) * (ft_strlen(value) + 1))))
+	if (!(node->value = (char *)ft_memalloc(sizeof(char) \
+					* (ft_strlen(value) + 1))))
 		node->value = NULL;
 	else
 		node->value = ft_strcpy(node->value, value);

@@ -6,11 +6,21 @@
 /*   By: aleduc <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/22 16:41:37 by aleduc            #+#    #+#             */
-/*   Updated: 2018/09/24 03:56:02 by aleduc           ###   ########.fr       */
+/*   Updated: 2018/09/29 15:03:08 by aleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	lil_cpy(char *s1, int *i1, char *s2, int *i2)
+{
+	while (s1[*i1])
+	{
+		s2[*i2] = s1[*i1];
+		(*i1)++;
+		(*i2)++;
+	}
+}
 
 char	*replace(t_env *env_s, char *key, char *name, t_lst **head)
 {
@@ -25,31 +35,18 @@ char	*replace(t_env *env_s, char *key, char *name, t_lst **head)
 	size = (ft_strlen(env_s->line) - ft_strlen(key) + ft_strlen(value));
 	if (!(newline = ft_memalloc(sizeof(char) * (size + 1))))
 		return (NULL);
-	size = 0;
-	while (env_s->line[size])
+	size = -1;
+	while (env_s->line[++size])
 	{
 		if (env_s->line[size] == '$')
-		{
 			if (delimiter(env_s->line[size + 1]) == 0)
 				break ;
-		}
 		newline[size] = env_s->line[size];
-		size++;
 	}
 	dollars = size;
-	while (value[count])
-	{
-		newline[size] = value[count];
-		count++;
-		size++;
-	}
+	lil_cpy(value, &count, newline, &size);
 	dollars = dollars + ft_strlen(key);
-	while (env_s->line[dollars])
-	{
-		newline[size] = env_s->line[dollars];
-		size++;
-		dollars++;
-	}
+	lil_cpy(env_s->line, &dollars, newline, &size);
 	free(value);
 	return (newline);
 }
@@ -87,7 +84,8 @@ char	*del(t_env *env_s, char *key)
 
 int		delimiter(char c)
 {
-	if (c == '-' || c == '+' || c == '/' || c == ' ' || c == '\t' || c == '=' || c == '|' || c == '$' || c == '\n' || c == '\r' || c == '\0')
+	if (c == '-' || c == '+' || c == '/' || c == ' ' || c == '\t' || c == '=' \
+			|| c == '|' || c == '$' || c == '\n' || c == '\r' || c == '\0')
 		return (1);
 	return (0);
 }
@@ -95,7 +93,8 @@ int		delimiter(char c)
 void	set_line(t_env *env_s, char *newline)
 {
 	free(env_s->line);
-	if (!(env_s->line = (char *)ft_memalloc(sizeof(char) * (ft_strlen(newline) + 1))))
+	if (!(env_s->line = (char *)ft_memalloc(sizeof(char) \
+					* (ft_strlen(newline) + 1))))
 		return ;
 	ft_strcpy(env_s->line, newline);
 }
@@ -127,7 +126,6 @@ int		dollars(t_env *env_s, t_lst **head)
 			count++;
 			if (delimiter(env_s->line[start]))
 			{
-//				ft_putendl("Error : A var in your ENV is needed");
 				key = ft_strsub(env_s->line, (start - count), count);
 				name = ft_strsub(key, 1, (ft_strlen(key) - 1));
 				if (lst_check_name(name, head))
@@ -152,7 +150,8 @@ int		dollars(t_env *env_s, t_lst **head)
 
 int		rules(t_env *env_s, int count)
 {
-	if (count == 0 || env_s->line[count - 1] == ' ' || env_s->line[count - 1] == '\t')
+	if (count == 0 || env_s->line[count - 1] == ' ' \
+			|| env_s->line[count - 1] == '\t')
 	{
 		if (env_s->line[count + 1] == '\0')
 			return (1);

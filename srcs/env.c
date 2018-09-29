@@ -6,7 +6,7 @@
 /*   By: aleduc <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/24 15:09:02 by aleduc            #+#    #+#             */
-/*   Updated: 2018/09/25 22:43:23 by aleduc           ###   ########.fr       */
+/*   Updated: 2018/09/29 14:33:51 by aleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ char	**ft_first_cut(char **env)
 	count = 0;
 	while (env[count])
 	{
-		if (!(one_cut[count] = (char*)ft_memalloc(sizeof(char) * (ft_strlen(env[count]) + 1))))
+		if (!(one_cut[count] = (char*)ft_memalloc(sizeof(char) \
+						* (ft_strlen(env[count]) + 1))))
 			return (NULL);
 		one_cut[count] = ft_strcpy(one_cut[count], env[count]);
 		count++;

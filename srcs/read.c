@@ -6,13 +6,13 @@
 /*   By: aleduc <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/25 17:06:41 by aleduc            #+#    #+#             */
-/*   Updated: 2018/09/25 22:45:20 by aleduc           ###   ########.fr       */
+/*   Updated: 2018/09/29 14:43:25 by aleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	isdir(const char *file)
+int		isdir(const char *file)
 {
 	struct stat	buff;
 
@@ -26,12 +26,35 @@ int	isdir(const char *file)
 	return (0);
 }
 
+void	error_msg(int code, t_env *env_s)
+{
+	if (code == 0)
+	{
+		ft_putstr("minishell: command not found");
+		if (env_s->tab[0])
+		{
+			ft_putstr(": ");
+			ft_putendl(env_s->tab[0]);
+		}
+	}
+}
+
+void	bin_by_path(int *code, t_env *env_s, t_lst **head)
+{
+	if (*code == 0 && (access(env_s->tab[0], X_OK) == 0) \
+			&& (isdir(env_s->tab[0]) == 0))
+	{
+		call_bin(env_s->tab[0], env_s, head);
+		*code = 1;
+	}
+}
+
 void	ft_search_bin(t_env *env_s, t_lst **head)
 {
 	char	*envpath;
 	char	**paths;
-	int	counts;
-	int	code;
+	int		counts;
+	int		code;
 
 	paths = NULL;
 	code = 0;
@@ -51,21 +74,8 @@ void	ft_search_bin(t_env *env_s, t_lst **head)
 			code = ft_fork_exec(paths[counts], env_s, head);
 		free_double_tab(paths);
 	}
-	if (code == 0 && (access(env_s->tab[0], X_OK) == 0) && (isdir(env_s->tab[0]) == 0))
-	{
-		ft_putendl("YOYYOYO");
-		call_bin(env_s->tab[0], env_s, head);
-		code = 1;
-	}
-	if (code == 0)
-	{
-		ft_putstr("minishell: command not found");
-		if (env_s->tab[0])
-		{
-			ft_putstr(": ");
-			ft_putendl(env_s->tab[0]);
-		}
-	}
+	bin_by_path(&code, env_s, head);
+	error_msg(code, env_s);
 }
 
 void	read_fct(t_env *env_s, t_lst **head)
