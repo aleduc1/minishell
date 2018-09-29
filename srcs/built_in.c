@@ -6,7 +6,7 @@
 /*   By: aleduc <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/27 00:59:45 by aleduc            #+#    #+#             */
-/*   Updated: 2018/09/25 22:30:15 by aleduc           ###   ########.fr       */
+/*   Updated: 2018/09/29 12:20:14 by aleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,8 +187,8 @@ void	ft_env(t_env *env_s, t_lst **head)
 			ft_print_env(&newlist); // a dl
 			create_newenv(&newenv, env_s, setenv_ret);
 			exec_env(&newenv, &newlist);
-			del_lst(&newlist);
 		}
+		del_lst(&newlist);
 	}
 }
 
