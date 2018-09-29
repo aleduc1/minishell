@@ -6,7 +6,7 @@
 /*   By: aleduc <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/18 04:49:38 by aleduc            #+#    #+#             */
-/*   Updated: 2018/09/25 22:30:10 by aleduc           ###   ########.fr       */
+/*   Updated: 2018/09/29 15:52:06 by aleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static int	exist(char *str, char c)
 	return (0);
 }
 
-char	**split_once(char *str, char c)
+char		**split_once(char *str, char c)
 {
 	int		count;
 	char	**tab;

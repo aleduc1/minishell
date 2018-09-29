@@ -6,7 +6,7 @@
 /*   By: aleduc <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/25 12:22:33 by aleduc            #+#    #+#             */
-/*   Updated: 2018/09/18 03:38:35 by aleduc           ###   ########.fr       */
+/*   Updated: 2018/09/29 15:52:31 by aleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ static char	**ft_alloc_words(char const *str, char **tab)
 	return (tab);
 }
 
-char	**ft_split_whitespaces(char const *str)
+char		**ft_split_whitespaces(char const *str)
 {
 	char	**tab;
 

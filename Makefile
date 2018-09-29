@@ -6,7 +6,7 @@
 #    By: aleduc <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/13 16:40:19 by aleduc            #+#    #+#              #
-#    Updated: 2018/09/29 14:22:10 by aleduc           ###   ########.fr        #
+#    Updated: 2018/09/29 16:14:28 by aleduc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,12 +14,12 @@ NAME = minishell
 SRC_PATH = srcs/
 OBJ_PATH = obj/
 SRC_NAME = main.c env.c read.c lexer.c built_in.c free.c list.c list_2.c\
-		   list_3.c dir.c expanses.c
+		   list_3.c dir.c expanses.c cd.c dollars.c env_b_i.c tilde.c
 OBJ_NAME = $(SRC_NAME:.c=.o)
 SRC = $(addprefix $(SRC_PATH),$(SRC_NAME))
 OBJ = $(addprefix $(OBJ_PATH),$(OBJ_NAME))
 CC = gcc
-CFLAGS = -Wall -Wextra -g3
+CFLAGS = -Wall -Wextra -Werror
 
 all : $(NAME)
 

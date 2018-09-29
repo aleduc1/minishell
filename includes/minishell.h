@@ -6,7 +6,7 @@
 /*   By: aleduc <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/20 18:01:18 by aleduc            #+#    #+#             */
-/*   Updated: 2018/09/25 21:45:09 by aleduc           ###   ########.fr       */
+/*   Updated: 2018/09/29 16:29:13 by aleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@
 # define B_SETENV	0b010000
 # define B_UNSETENV	0b100000
 
-typedef struct s_env t_env;
-typedef struct s_fptr t_fptr;
+typedef struct s_env	t_env;
+typedef struct s_norm	t_norm;
+typedef struct s_fptr	t_fptr;
 
-
-struct s_env
+struct	s_env
 {
 	char	**key_value;
 	char	*line;
@@ -38,34 +38,54 @@ struct s_env
 	int		count;
 };
 
-struct s_fptr
+struct	s_fptr
 {
 	void	(*f)(t_env *, t_lst **head);
 	int		bitmask;
 };
 
-/* Create own env */
+struct	s_norm
+{
+	int		start;
+	int		count;
+	char	*key;
+	char	*name;
+	char	*newline;
+};
+
+/*
+** Create own env
+*/
 
 void	env_cpy(char **environ, t_lst **env);
 char	**ft_first_cut(char **env);
-void	ft_scd_cut(char **one_cut, t_env *env_s);
 void	put_in_list(char **scd_cut, t_lst **start);
 
-/* Expanses $ */
+/*
+** Expanses $
+*/
 
+void	lil_cpy(char *s1, int *i1, char *s2, int *i2);
 char	*replace(t_env *env_s, char *key, char *name, t_lst **head);
 char	*del(t_env *env_s, char *key);
 int		dollars(t_env *env_s, t_lst **head);
+void	pod(char *newline, t_env *env_s, char *repl);
+int		pod_2(t_env *env_s);
+void	free_stuff_dollars(char *newline, char *key, char *name);
 int		delimiter(char c);
 void	set_line(t_env *env_s, char *newline);
 
-/* Expanses ~ */
+/*
+** Expanses ~
+*/
 
 void	tilde(t_env *env_s, t_lst **head);
 int		rules(t_env *env_s, int count);
 char	*replace_tld(int count, t_env *env_s, t_lst **head);
 
-/* List manipulation */
+/*
+** List manipulation
+*/
 
 t_lst	*create_node(char **scd_cut);
 t_lst	*create_new_node(char *key, char *value);
@@ -83,14 +103,19 @@ char	**list_to_char(t_lst **head);
 void	del_lst(t_lst **head);
 void	cpy_lst(t_lst **dst, t_lst **src);
 
-/* Reading input */
+/*
+** Reading input
+*/
 
-int	isdir(const char *file);
+int		isdir(const char *file);
+void	error_msg(int code, t_env *env_s);
+void	bin_by_path(int *code, t_env *env_s, t_lst **head);
 void	ft_search_bin(t_env *env_s, t_lst **head);
 void	read_fct(t_env *env_s, t_lst **head);
-void	exec_env(t_env *newenv, t_lst **newlist);
 
-/* Dir functions */
+/*
+** Dir functions
+*/
 
 void	ft_error(int code);
 int		dir_functs(char *filename, t_env *env_s);
@@ -98,13 +123,17 @@ int		ft_fork_exec(char *filename, t_env *env_s, t_lst **head);
 char	*create_path(char *filename, char *bin);
 void	call_bin(char *binpath, t_env *env_s, t_lst **head);
 
-/* Lexing-Parsing */
+/*
+** Lexing-Parsing
+*/
 
 int		ft_lexer(t_env *env_s);
 void	ft_parser(t_env *env_s, t_lst **head);
 void	set_tab_fptr(t_env *env_s);
 
-/* Built_in */
+/*
+** Built_in
+*/
 
 int		ft_getarg(char *str);
 
@@ -119,13 +148,17 @@ void	ft_exit(t_env *env_s, t_lst **head);
 
 void	ft_env(t_env *env_s, t_lst **head);
 void	create_newenv(t_env *dst, t_env *src, int here);
-int		manage_setenv(t_lst **head, t_env *env_s);
+void	exec_env(t_env *newenv, t_lst **newlist);
+void	man_set_2(char **tab, t_lst **newlist, int *return_value, int *i);
+int		manage_setenv(t_lst **newlist, t_env *env_s);
 
 void	ft_setenv(t_env *env_s, t_lst **head);
 
 void	ft_unsetenv(t_env *env_s, t_lst **head);
 
-/* Free fonctions */
+/*
+** Free fonctions
+*/
 
 void	free_double_tab(char **tab);
 void	free_struct(t_env *env_s);
