@@ -6,7 +6,7 @@
 /*   By: aleduc <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/12 12:20:24 by aleduc            #+#    #+#             */
-/*   Updated: 2018/09/23 21:24:46 by aleduc           ###   ########.fr       */
+/*   Updated: 2018/09/29 14:27:44 by aleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,12 @@ int		dir_functs(char *filename, t_env *env_s)
 	DIR				*pdir;
 	struct dirent	*pent;
 
+
 	if (!(pdir = opendir(filename)))
+	{
 		ft_error(1);
+		return (0);
+	}
 	while ((pent = readdir(pdir)))
 	{
 		if (pent == NULL)
